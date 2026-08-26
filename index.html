@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <!-- SEO Primary Meta Tags -->
+  <title id="meta-title">Kodjo Tsagli | Coordinateur de Projets Internationaux & Interprète Multilingue</title>
+  <meta name="title" id="meta-name-title" content="Kodjo Tsagli | Coordinateur de Projets Internationaux & Interprète Multilingue">
+  <meta name="description" id="meta-description" content="Portfolio professionnel de Kodjo Tsagli, Coordinateur de Projets avec plus de 8 ans d'expérience en coopération internationale, gestion d'infrastructures portuaires et interprétariat trilingue (Français, Anglais, Éwé).">
+  <meta name="keywords" id="meta-keywords" content="Kodjo Tsagli, Coordinateur de Projets, Coopération Internationale, Interprétariat, Togo, Port de Lomé, OAFIC, Gestion de projets, Coursera Google PM">
+  <meta name="author" content="Kodjo Tsagli">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Facebook / LinkedIn -->
+  <meta property="og:type" content="profile">
+  <meta property="og:url" content="https://kodjo-tsagli.github.io/">
+  <meta property="og:title" id="og-title" content="Kodjo Tsagli | Coordinateur de Projets Internationaux & Interprète Multilingue">
+  <meta property="og:description" id="og-description" content="Portfolio professionnel de Kodjo Tsagli. 8+ ans d'expérience en coopération internationale, secteur portuaire et médiation trilingue (FR • EN • EWÉ).">
+  <meta property="og:image" content="assets/images/profile.jpg">
+
+  <!-- Twitter Card -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" id="twitter-title" content="Kodjo Tsagli | Coordinateur de Projets Internationaux">
+  <meta property="twitter:description" id="twitter-description" content="Portfolio de Kodjo Tsagli : Gestion de projets internationaux, Coopération japonaise, Interprétariat trilingue.">
+  <meta property="twitter:image" content="assets/images/profile.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg">
+  <link rel="apple-touch-icon" href="favicon/favicon.svg">
+
+  <!-- Preconnect Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Structured Data JSON-LD (Schema.org for Google) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Kodjo Tsagli",
+    "jobTitle": "Project Coordinator & Multilingual Interpreter",
+    "url": "https://kodjo-tsagli.github.io/",
+    "email": "tsagleekod@gmail.com",
+    "telephone": "+22871232929",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Lomé-Adétikopé",
+      "addressCountry": "TG"
+    },
+    "sameAs": [
+      "https://linkedin.com/in/kodjo-tsagli"
+    ],
+    "knowsLanguage": ["fra", "eng", "ewe"],
+    "alumniOf": {
+      "@type": "EducationalOrganization",
+      "name": "Université de Lomé"
+    }
+  }
+  </script>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <header class="site-header" id="site-header">
+    <div class="container nav-container">
+      <a href="#hero" class="brand-logo" aria-label="Kodjo Tsagli - Accueil">
+        <span class="logo-mark">KT</span>
+        <span class="logo-text">Kodjo <strong>Tsagli</strong></span>
+      </a>
+
+      <!-- Desktop & Mobile Nav Links -->
+      <nav class="main-nav" id="main-nav" aria-label="Navigation principale">
+        <ul class="nav-list">
+          <li><a href="#about" class="nav-link" data-i18n="nav.about">À propos</a></li>
+          <li><a href="#services" class="nav-link" data-i18n="nav.services">Services</a></li>
+          <li><a href="#experience" class="nav-link" data-i18n="nav.experience">Expérience</a></li>
+          <li><a href="#projects" class="nav-link" data-i18n="nav.projects">Projets</a></li>
+          <li><a href="#skills" class="nav-link" data-i18n="nav.skills">Compétences</a></li>
+          <li><a href="#education" class="nav-link" data-i18n="nav.education">Formation</a></li>
+          <li><a href="#why-me" class="nav-link" data-i18n="nav.whyMe">Pourquoi moi ?</a></li>
+          <li><a href="#contact" class="nav-link nav-link-highlight" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Action Controls (Language & Theme) -->
+      <div class="nav-actions">
+        <!-- Language Switcher -->
+        <button id="lang-toggle-btn" class="lang-switch-btn" aria-label="Changer de langue (Switch to English)">
+          <span class="lang-opt" data-lang-val="fr">FR</span>
+          <span class="lang-divider">|</span>
+          <span class="lang-opt" data-lang-val="en">EN</span>
+        </button>
+
+        <!-- Dark / Light Theme Toggle -->
+        <button id="theme-toggle-btn" class="theme-switch-btn" aria-label="Basculer le thème sombre/clair" title="Changer le thème">
+          <svg class="theme-icon sun-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="theme-icon moon-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-nav-toggle" class="mobile-toggle-btn" aria-expanded="false" aria-controls="main-nav" aria-label="Ouvrir le menu">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- HERO SECTION -->
+    <section id="hero" class="hero-section">
+      <div class="hero-bg-shapes" aria-hidden="true">
+        <div class="shape-glow glow-1"></div>
+        <div class="shape-glow glow-2"></div>
+        <div class="grid-overlay"></div>
+      </div>
+
+      <div class="container hero-container">
+        <div class="hero-content">
+          <!-- Availability Pill Badge -->
+          <div class="badge-status-wrap">
+            <span class="status-indicator"></span>
+            <span class="status-text" id="hero-availability" data-i18n="hero.availability">Disponible pour nouvelles opportunités &amp; missions</span>
+          </div>
+
+          <!-- Greeting & Name -->
+          <p class="hero-greeting" data-i18n="hero.greeting">Bonjour, je suis</p>
+          <h1 class="hero-name" id="hero-name">Kodjo <span>Tsagli</span></h1>
+          
+          <!-- Professional Title -->
+          <p class="hero-title" id="hero-title" data-i18n="hero.title">
+            Coordinateur de Projets Internationaux | Coopération &amp; Infrastructures | Interprète Multilingue
+          </p>
+
+          <!-- Executive Subtitle -->
+          <p class="hero-subtitle" id="hero-subtitle" data-i18n="hero.subtitle">
+            Plus de 8 ans d'expérience en coordination de projets multiculturels, appui aux initiatives de coopération internationale (notamment japonaise) dans le secteur portuaire et médiation trilingue (Français • Anglais • Éwé).
+          </p>
+
+          <!-- CTA Action Buttons -->
+          <div class="hero-actions">
+            <a href="#experience" class="btn btn-primary" id="btn-hero-path">
+              <span data-i18n="hero.btnPath">Voir mon parcours</span>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            
+            <a href="#contact" class="btn btn-secondary" id="btn-hero-contact">
+              <span data-i18n="hero.btnContact">Me contacter</span>
+            </a>
+
+            <a href="assets/documents/CV_Kodjo_Tsagli_FR_1.docx" class="btn btn-outline" id="btn-hero-cv" download>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span id="hero-cv-text" data-i18n="hero.btnCv">Télécharger mon CV (FR)</span>
+            </a>
+          </div>
+
+          <!-- Key Quick Stats -->
+          <div class="hero-stats-grid" id="hero-stats">
+            <!-- Dynamically populated from config.js or fallback -->
+            <div class="stat-card">
+              <div class="stat-val">8+</div>
+              <div class="stat-label">Années d'expérience</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-val">3</div>
+              <div class="stat-label">Langues maîtrisées</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-val">100%</div>
+              <div class="stat-label">Engagement &amp; Rigueur</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-val">Japon / Togo / Bénin</div>
+              <div class="stat-label">Portée multilatérale</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Visual Profile Card -->
+        <div class="hero-visual">
+          <div class="profile-card-wrap">
+            <div class="profile-avatar-frame">
+              <img src="assets/images/profile.jpg" id="profile-img" alt="Kodjo Tsagli - Coordinateur de Projets" class="profile-img" width="360" height="360" loading="eager">
+              <div class="avatar-glow-ring"></div>
+            </div>
+
+            <!-- Floating Experience Badge -->
+            <div class="floating-badge badge-exp">
+              <div class="badge-icon-box">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+              </div>
+              <div class="badge-text">
+                <span class="badge-number">8+ Ans</span>
+                <span class="badge-subtitle">Coordination &amp; Projets</span>
+              </div>
+            </div>
+
+            <!-- Floating Languages Badge -->
+            <div class="floating-badge badge-lang">
+              <div class="badge-icon-box">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+              </div>
+              <div class="badge-text">
+                <span class="badge-number">Trilingue</span>
+                <span class="badge-subtitle">Français • Anglais • Éwé</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="section about-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag" data-i18n="about.sectionTag">Profil Professionnel</span>
+          <h2 class="section-title" data-i18n="about.title">À propos de moi</h2>
+          <div class="section-divider"></div>
+        </div>
+
+        <div class="about-grid">
+          <!-- Text Narrative Column -->
+          <div class="about-text-col">
+            <p class="lead-text" id="about-lead" data-i18n="about.lead">
+              Coordinateur de projets comptant plus de 8 ans d'expérience en coopération internationale, gestion de projets et coordination de parties prenantes multiculturelles.
+            </p>
+            
+            <div class="about-paragraphs" id="about-paragraphs">
+              <p>Expert en interprétariat trilingue (français, anglais, éwé) et en appui aux initiatives de coopération japonaise dans le secteur portuaire et des infrastructures. Reconnu pour ma capacité à assurer une liaison fluide et efficace entre experts internationaux, autorités locales et partenaires institutionnels.</p>
+              <p>Mon parcours combine gestion opérationnelle de terrain (opérations maritimes et de dragage, missions d'évaluation portuaire) et rigueur administrative de haut niveau.</p>
+              <p>Passionné par l'efficience des organisations, je prépare activement la certification professionnelle Google Project Management et j'ai complété le certificat Google IA sur Coursera. Je suis à la recherche d'un poste ou de missions de coordination de projets dans un environnement international et multiculturel.</p>
+            </div>
+
+            <!-- Quick Contact Snapshot -->
+            <div class="about-contact-snapshot">
+              <div class="snapshot-item">
+                <span class="snapshot-label">Localisation :</span>
+                <span class="snapshot-value">Lomé-Adétikopé, Togo</span>
+              </div>
+              <div class="snapshot-item">
+                <span class="snapshot-label">Email :</span>
+                <a href="mailto:tsagleekod@gmail.com" class="snapshot-link">tsagleekod@gmail.com</a>
+              </div>
+              <div class="snapshot-item">
+                <span class="snapshot-label">WhatsApp (Uniquement) :</span>
+                <a href="https://wa.me/22871232929" target="_blank" rel="noopener noreferrer" class="snapshot-link">+228 71 23 29 29</a>
+              </div>
+              <div class="snapshot-item">
+                <span class="snapshot-label">LinkedIn :</span>
+                <a href="https://linkedin.com/in/kodjo-tsagli" target="_blank" rel="noopener noreferrer" class="snapshot-link">linkedin.com/in/kodjo-tsagli</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Highlight Cards Column -->
+          <div class="about-highlights-col" id="about-highlights">
+            <!-- Dynamically populated from config.js -->
+            <div class="highlight-card">
+              <div class="highlight-icon">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+              </div>
+              <div class="highlight-info">
+                <h4>Coopération Internationale</h4>
+                <p>Expertise éprouvée auprès d'organismes japonais et institutions publiques d'Afrique de l'Ouest.</p>
+              </div>
+            </div>
+
+            <div class="highlight-card">
+              <div class="highlight-icon">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </div>
+              <div class="highlight-info">
+                <h4>Liaison Parties Prenantes</h4>
+                <p>Médiation et concertation entre équipes techniques, ministères et communautés locales.</p>
+              </div>
+            </div>
+
+            <div class="highlight-card">
+              <div class="highlight-icon">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 8l6 6"></path>
+                  <path d="M4 14h16"></path>
+                  <path d="M2 5h12"></path>
+                  <path d="M7 2h1"></path>
+                  <path d="M22 22l-5-10-5 10"></path>
+                  <path d="M14 18h6"></path>
+                </svg>
+              </div>
+              <div class="highlight-info">
+                <h4>Trilinguisme Stratégique</h4>
+                <p>Français (C2), Anglais (C1) et Éwé-Mina-Guin (maternelle) pour une fluidité totale des échanges.</p>
+              </div>
+            </div>
+
+            <div class="highlight-card">
+              <div class="highlight-icon">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+              </div>
+              <div class="highlight-info">
+                <h4>Discipline &amp; Esprit d'équipe</h4>
+                <p>Instructeur de Karaté-Do, alliant rigueur, sens du respect et concentration sur les objectifs.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="services" class="section services-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag" data-i18n="services.sectionTag">Expertise &amp; Offre</span>
+          <h2 class="section-title" data-i18n="services.title">Mes Services Professionnels</h2>
+          <p class="section-subtitle" data-i18n="services.subtitle">Des prestations ciblées et adaptées aux exigences des organisations internationales, des institutions publiques et des entreprises privées.</p>
+          <div class="section-divider center"></div>
+        </div>
+
+        <div class="services-grid" id="services-container">
+          <!-- Populated dynamically via config.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE SECTION (TIMELINE) -->
+    <section id="experience" class="section experience-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag" data-i18n="experience.sectionTag">Parcours Professionnel</span>
+          <h2 class="section-title" data-i18n="experience.title">Expérience Professionnelle</h2>
+          <p class="section-subtitle" data-i18n="experience.subtitle">Un historique prouvé de plus de 8 ans dans des projets d'infrastructures, de coopération multilatérale et de développement.</p>
+          <div class="section-divider center"></div>
+        </div>
+
+        <div class="timeline-wrapper">
+          <div class="timeline-track" aria-hidden="true"></div>
+          <div class="timeline-items" id="experience-timeline">
+            <!-- Populated dynamically via config.js -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects" class="section projects-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag" data-i18n="projects.sectionTag">Réalisations</span>
+          <h2 class="section-title" data-i18n="projects.title">Projets Réalisés &amp; Missions Clés</h2>
+          <p class="section-subtitle" data-i18n="projects.subtitle">Aperçu de mes interventions majeures en gestion portuaire, infrastructures et développement institutionnel.</p>
+          <div class="section-divider center"></div>
+        </div>
+
+        <div class="projects-grid" id="projects-container">
+          <!-- Populated dynamically via config.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="section skills-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag" data-i18n="skills.sectionTag">Savoir-faire</span>
+          <h2 class="section-title" data-i18n="skills.title">Compétences &amp; Domaines d'Expertise</h2>
+          <p class="section-subtitle" data-i18n="skills.subtitle">Un ensemble structuré de compétences techniques, managériales, linguistiques et digitales.</p>
+          <div class="section-divider center"></div>
+        </div>
+
+        <div class="skills-categories-grid" id="skills-container">
+          <!-- Populated dynamically via config.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- LANGUAGES SECTION -->
+    <section id="languages" class="section languages-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag" data-i18n="languages.sectionTag">Atout Linguistique</span>
+          <h2 class="section-title" data-i18n="languages.title">Langues Maîtrisées</h2>
+          <p class="section-subtitle" data-i18n="languages.subtitle">Un profil trilingue pour une communication sans barrière entre acteurs internationaux et communautés locales.</p>
+          <div class="section-divider center"></div>
+        </div>
+
+        <div class="languages-grid" id="languages-container">
+          <!-- Populated dynamically via config.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION & CERTIFICATIONS SECTION -->
+    <section id="education" class="section education-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag" data-i18n="education.sectionTag">Parcours Académique</span>
+          <h2 class="section-title" data-i18n="education.title">Formation &amp; Certifications</h2>
+          <p class="section-subtitle" data-i18n="education.subtitle">Un socle académique solide complété par des certifications professionnelles internationales d'actualité.</p>
+          <div class="section-divider center"></div>
+        </div>
+
+        <div class="education-layout-grid">
+          <!-- Degrees & Certifications Column -->
+          <div class="education-main-col">
+            <h3 class="col-heading">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+              </svg>
+              Diplômes Universitaires
+            </h3>
+            <div class="degrees-list" id="degrees-container">
+              <!-- Populated dynamically via config.js -->
+            </div>
+
+            <h3 class="col-heading mt-6">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="8" r="7"></circle>
+                <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+              </svg>
+              Certifications Professionnelles
+            </h3>
+            <div class="certifications-list" id="certifications-container">
+              <!-- Populated dynamically via config.js -->
+            </div>
+          </div>
+
+          <!-- Additional Passions & Soft Skills Column -->
+          <div class="education-side-col">
+            <div class="interests-card" id="interests-card">
+              <!-- Populated dynamically via config.js -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY WORK WITH ME SECTION -->
+    <section id="why-me" class="section why-me-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag" data-i18n="whyMe.sectionTag">Valeur Ajoutée</span>
+          <h2 class="section-title" data-i18n="whyMe.title">Pourquoi travailler avec moi ?</h2>
+          <p class="section-subtitle" data-i18n="whyMe.subtitle">6 atouts concrets forgés par 8 années d'interventions réussies sur le terrain et auprès des décideurs.</p>
+          <div class="section-divider center"></div>
+        </div>
+
+        <div class="why-me-grid" id="why-me-container">
+          <!-- Populated dynamically via config.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- CALL TO ACTION (CTA) SECTION -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-box">
+          <div class="cta-glow" aria-hidden="true"></div>
+          <div class="cta-content">
+            <h2 class="cta-title" id="cta-title" data-i18n="cta.title">Vous avez un projet ou une mission à coordonner ?</h2>
+            <p class="cta-subtitle" id="cta-subtitle" data-i18n="cta.subtitle">Que vous soyez une organisation internationale, une institution publique, une ONG ou une entreprise privée, échangeons sur vos objectifs et voyons comment je peux apporter une valeur décisive à vos opérations.</p>
+            <div class="cta-buttons">
+              <a href="#contact" class="btn btn-primary btn-large" id="btn-cta-contact">
+                <span data-i18n="cta.btnContact">Discutons de votre projet</span>
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+              <a href="https://wa.me/22871232929" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-large" id="btn-cta-call">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+                <span data-i18n="cta.btnCall">WhatsApp Direct</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="section contact-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag" data-i18n="contact.sectionTag">Prise de Contact</span>
+          <h2 class="section-title" data-i18n="contact.title">Me Contacter</h2>
+          <p class="section-subtitle" data-i18n="contact.subtitle">Disponible pour des opportunités de coordination de projet, de missions de conseil ou d'interprétariat.</p>
+          <div class="section-divider center"></div>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Info Cards Side -->
+          <div class="contact-info-col">
+            <h3 class="contact-col-title">Coordonnées Directes</h3>
+            <p class="contact-col-desc">N'hésitez pas à me joindre directement par email, téléphone, ou via mon profil LinkedIn pour toute demande d'information ou proposition de mission.</p>
+            
+            <div class="contact-cards-list" id="contact-info-cards">
+              <!-- Populated dynamically via config.js -->
+            </div>
+          </div>
+
+          <!-- Interactive Contact Form Side -->
+          <div class="contact-form-col">
+            <div class="form-card">
+              <form id="contact-form" class="contact-form" novalidate>
+                <div class="form-group">
+                  <label for="form-name" id="label-name" data-i18n="contact.form.nameLabel">Votre Nom complet <span class="required">*</span></label>
+                  <div class="input-wrap">
+                    <input type="text" id="form-name" name="name" required placeholder="Ex: Marie Dupont / John Smith" autocomplete="name">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="form-email" id="label-email" data-i18n="contact.form.emailLabel">Votre Adresse Email <span class="required">*</span></label>
+                  <div class="input-wrap">
+                    <input type="email" id="form-email" name="email" required placeholder="Ex: contact@organisation.org" autocomplete="email">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="form-subject" id="label-subject" data-i18n="contact.form.subjectLabel">Objet de votre message <span class="required">*</span></label>
+                  <div class="input-wrap">
+                    <input type="text" id="form-subject" name="subject" required placeholder="Ex: Proposition de mission / Coordination de projet">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="form-message" id="label-message" data-i18n="contact.form.messageLabel">Votre Message <span class="required">*</span></label>
+                  <div class="input-wrap">
+                    <textarea id="form-message" name="message" rows="5" required placeholder="Présentez brièvement votre projet, vos attentes et les détails de votre demande..."></textarea>
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block" id="form-submit-btn">
+                  <span id="btn-submit-text" data-i18n="contact.form.submitBtn">Envoyer le message</span>
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                  </svg>
+                </button>
+
+                <div id="form-feedback" class="form-feedback" role="alert" aria-live="polite"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-top-grid">
+        <!-- Brand & Bio -->
+        <div class="footer-brand-col">
+          <a href="#hero" class="brand-logo footer-logo">
+            <span class="logo-mark">KT</span>
+            <span class="logo-text">Kodjo <strong>Tsagli</strong></span>
+          </a>
+          <p class="footer-bio" id="footer-bio" data-i18n="footer.bio">
+            Coordinateur de projets internationaux, expert en liaison institutionnelle et interprète multilingue. Dédié à la réussite des initiatives de développement et d'infrastructures.
+          </p>
+          <div class="footer-socials">
+            <a href="https://linkedin.com/in/kodjo-tsagli" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Kodjo Tsagli" class="social-icon-btn">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+              </svg>
+            </a>
+            <a href="https://wa.me/22871232929" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Kodjo Tsagli" class="social-icon-btn">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.25-.75-.67-1.26-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1s.9 2.43 1.03 2.6c.13.17 1.77 2.7 4.28 3.79.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.12-.22-.19-.47-.32z"/>
+              </svg>
+            </a>
+            <a href="mailto:tsagleekod@gmail.com" aria-label="Email Kodjo Tsagli" class="social-icon-btn">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Navigation -->
+        <div class="footer-links-col">
+          <h4 class="footer-heading" data-i18n="footer.quickLinksTitle">Navigation rapide</h4>
+          <ul class="footer-nav">
+            <li><a href="#about" data-i18n="nav.about">À propos</a></li>
+            <li><a href="#services" data-i18n="nav.services">Services</a></li>
+            <li><a href="#experience" data-i18n="nav.experience">Expérience</a></li>
+            <li><a href="#projects" data-i18n="nav.projects">Projets</a></li>
+            <li><a href="#skills" data-i18n="nav.skills">Compétences</a></li>
+            <li><a href="#education" data-i18n="nav.education">Formation</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Snapshot -->
+        <div class="footer-contact-col">
+          <h4 class="footer-heading" data-i18n="footer.contactTitle">Coordonnées</h4>
+          <ul class="footer-contact-list">
+            <li><strong>Localisation :</strong> Lomé-Adétikopé, Togo</li>
+            <li><strong>Email :</strong> <a href="mailto:tsagleekod@gmail.com">tsagleekod@gmail.com</a></li>
+            <li><strong>WhatsApp (Uniquement) :</strong> <a href="https://wa.me/22871232929" target="_blank" rel="noopener noreferrer">+228 71 23 29 29</a></li>
+            <li><strong>LinkedIn :</strong> <a href="https://linkedin.com/in/kodjo-tsagli" target="_blank" rel="noopener noreferrer">kodjo-tsagli</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; <span id="year-placeholder">2026</span> Kodjo Tsagli. <span data-i18n="footer.rights">Tous droits réservés.</span></p>
+        <p class="footer-designed" data-i18n="footer.designedFor">Portfolio professionnel certifié conforme aux informations officielles du CV.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Floating Button -->
+  <button id="scroll-to-top" class="scroll-top-btn" aria-label="Retour en haut de page" title="Haut de page">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <!-- Scripts -->
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
