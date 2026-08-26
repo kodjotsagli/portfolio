@@ -1,0 +1,5 @@
+# robots.txt pour le portfolio de Kodjo Tsagli
+User-agent: *
+Allow: /
+
+Sitemap: https://kodjo-tsagli.github.io/sitemap.xml

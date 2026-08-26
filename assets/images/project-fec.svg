@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 350" width="100%" height="100%">
+  <defs>
+    <linearGradient id="fecBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="50%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </linearGradient>
+    <linearGradient id="flagGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#818CF8"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="350" fill="url(#fecBg)"/>
+  
+  <!-- Cooperation Bridge & Global Globe Lines -->
+  <circle cx="300" cy="300" r="220" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2"/>
+  <ellipse cx="300" cy="300" rx="160" ry="220" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1.5"/>
+  <line x1="80" y1="300" x2="520" y2="300" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+  
+  <!-- Bilateral exchange nodes -->
+  <g transform="translate(180, 150)">
+    <circle cx="0" cy="0" r="30" fill="rgba(255,255,255,0.1)" stroke="#38BDF8" stroke-width="2"/>
+    <text x="0" y="6" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">TG</text>
+  </g>
+  <path d="M 215 150 C 260 120, 340 120, 385 150" fill="none" stroke="#38BDF8" stroke-width="3" stroke-dasharray="6,4"/>
+  <g transform="translate(420, 150)">
+    <circle cx="0" cy="0" r="30" fill="rgba(255,255,255,0.1)" stroke="#F43F5E" stroke-width="2"/>
+    <text x="0" y="6" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">JP</text>
+  </g>
+
+  <!-- Badge -->
+  <rect x="40" y="40" width="280" height="34" rx="8" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+  <circle cx="58" cy="57" r="6" fill="#38BDF8"/>
+  <text x="74" y="62" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF" letter-spacing="0.5">Fishering Engineering Co., Ltd</text>
+  
+  <text x="40" y="320" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#FFFFFF">Coopération Technique &amp; Traduction</text>
+  <text x="40" y="338" font-family="system-ui, sans-serif" font-size="12" font-weight="500" fill="rgba(255,255,255,0.8)">Facilitation linguistique, experts japonais &amp; gestion de projet</text>
+</svg>
