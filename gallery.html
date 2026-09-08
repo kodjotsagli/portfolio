@@ -1273,7 +1273,7 @@
   </div>
 
   <!-- Scripts -->
-  <script src="config.js?v=2.3"></script>
+  <script src="config.js?v=2.4"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // État
@@ -1303,8 +1303,9 @@
       // ===================================================
       // CONTRÔLE D'ACCÈS ADMINISTRATEUR (KODJO TSAGLI)
       // ===================================================
-      // Mots de passe autorisés pour Kodjo (très faciles à retenir)
-      const ADMIN_CODES = ['2026', 'tsagli', '71232929'];
+      // Mot de passe administrateur sécurisé défini par Kodjo Tsagli
+      const ADMIN_PASSWORD = 'Ts@glee228';
+      const ADMIN_CODES = ['ts@glee228', 'Ts@glee228'];
 
       function isAdminUser() {
         return localStorage.getItem('kt_portfolio_admin_auth') === 'authenticated';
@@ -1322,23 +1323,23 @@
       }
 
       function promptAdminLogin() {
-        const code = prompt("🔒 Accès Administrateur Réservé — Kodjo Tsagli\n\nVeuillez saisir votre code d'accès :");
+        const code = prompt("🔒 Accès Administrateur Réservé — Kodjo Tsagli\n\nVeuillez saisir votre mot de passe d'accès :");
         if (code !== null) {
-          const cleanCode = code.trim().toLowerCase();
-          if (ADMIN_CODES.includes(cleanCode)) {
+          const input = code.trim();
+          if (input === ADMIN_PASSWORD || ADMIN_CODES.includes(input.toLowerCase())) {
             setAdminMode(true);
             alert("✅ Accès Administrateur validé !\n\nVous êtes connecté en tant que gestionnaire. Les boutons d'ajout et d'export sont maintenant visibles.");
           } else {
-            alert("❌ Code incorrect. L'accès aux outils de gestion est réservé au propriétaire du site.");
+            alert("❌ Mot de passe incorrect. L'accès aux outils de gestion est réservé au propriétaire du site.");
           }
         }
       }
 
-      // Détection automatique via URL (ex: gallery.html?admin ou gallery.html?admin=2026)
+      // Détection automatique via URL (ex: gallery.html?admin ou gallery.html?admin=Ts@glee228)
       const urlParams = new URLSearchParams(window.location.search);
       if (urlParams.has('admin')) {
-        const paramVal = (urlParams.get('admin') || '').trim().toLowerCase();
-        if (ADMIN_CODES.includes(paramVal)) {
+        const paramVal = (urlParams.get('admin') || '').trim();
+        if (paramVal === ADMIN_PASSWORD || ADMIN_CODES.includes(paramVal.toLowerCase())) {
           setAdminMode(true);
         } else if (!isAdminUser()) {
           promptAdminLogin();
@@ -1359,7 +1360,16 @@
           const raw = localStorage.getItem('kt_custom_gallery_items');
           if (raw) {
             const parsed = JSON.parse(raw);
-            if (Array.isArray(parsed)) return parsed;
+            if (Array.isArray(parsed)) {
+              const cleaned = parsed.filter(it => 
+                it.id !== 'visite-ambassadeur-japon' && 
+                !it.title?.includes('Ambassadeur')
+              );
+              if (cleaned.length !== parsed.length) {
+                localStorage.setItem('kt_custom_gallery_items', JSON.stringify(cleaned));
+              }
+              return cleaned;
+            }
           }
         } catch (e) {
           console.warn('Erreur lecture localStorage:', e);
@@ -1450,21 +1460,7 @@
           btnBack: "Retour au portfolio",
           btnViewFull: "Agrandir la photo",
           emptyMessage: "Aucune photo pour le moment.",
-          items: [
-            {
-              id: "visite-ambassadeur-japon",
-              image: "assets/images/gallery/avec l'ambasateur du japon.jpeg",
-              images: [
-                "assets/images/gallery/avec l'ambasateur du japon.jpeg"
-              ],
-              title: "Visite Officielle de l'Ambassadeur du Japon au Port de Lomé",
-              category: "cooperation",
-              categoryLabel: "Coopération & Réunions",
-              date: "Septembre 2026",
-              location: "Port de Pêche de Lomé, Togo",
-              caption: "Assistant Interprète de l'Ambassadeur du Japon en Côte d'Ivoire en visite officielle au Port de Pêche de Lomé."
-            }
-          ]
+          items: []
         },
         en: {
           sectionTag: "Proof of Work & Field Missions",
@@ -1480,21 +1476,7 @@
           btnBack: "Back to Portfolio",
           btnViewFull: "View Full Size",
           emptyMessage: "No photos yet.",
-          items: [
-            {
-              id: "visite-ambassadeur-japon",
-              image: "assets/images/gallery/avec l'ambasateur du japon.jpeg",
-              images: [
-                "assets/images/gallery/avec l'ambasateur du japon.jpeg"
-              ],
-              title: "Official Visit of the Japanese Ambassador to Lomé Port",
-              category: "cooperation",
-              categoryLabel: "Cooperation & Meetings",
-              date: "September 2026",
-              location: "Lomé Fishing Port, Togo",
-              caption: "Assistant Interpreter for the Ambassador of Japan in Côte d'Ivoire during his official visit to the Lomé Fishing Port."
-            }
-          ]
+          items: []
         }
       };
 
@@ -1510,7 +1492,7 @@
               PORTFOLIO_CONFIG.content[langKey] &&
               PORTFOLIO_CONFIG.content[langKey].gallery) {
             const cfg = PORTFOLIO_CONFIG.content[langKey].gallery;
-            const items = (Array.isArray(cfg.items) && cfg.items.length > 0) ? cfg.items : fallback.items;
+            const items = Array.isArray(cfg.items) ? cfg.items : (fallback.items || []);
             return {
               ...fallback,
               ...cfg,

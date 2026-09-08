@@ -488,21 +488,7 @@ const PORTFOLIO_CONFIG = {
             "3. Validez et vos photos apparaissent instantanément dans la galerie !"
           ]
         },
-        items: [
-          {
-            id: "visite-ambassadeur-japon",
-            image: "assets/images/gallery/avec l'ambasateur du japon.jpeg",
-            images: [
-              "assets/images/gallery/avec l'ambasateur du japon.jpeg"
-            ],
-            title: "Visite Officielle de l'Ambassadeur du Japon au Port de Lomé",
-            category: "cooperation",
-            categoryLabel: "Coopération & Réunions",
-            date: "Septembre 2026",
-            location: "Port de Pêche de Lomé, Togo",
-            caption: "Assistant Interprète de l'Ambassadeur du Japon en Côte d'Ivoire en visite officielle au Port de Pêche de Lomé."
-          }
-        ]
+        items: []
       },
       footer: {
         bio: "Coordinateur de projets internationaux, expert en liaison institutionnelle et interprète multilingue. Dédié à la réussite des initiatives de développement et d'infrastructures.",
@@ -967,21 +953,7 @@ const PORTFOLIO_CONFIG = {
             "3. Submit and your photos appear instantly in the gallery!"
           ]
         },
-        items: [
-          {
-            id: "visite-ambassadeur-japon",
-            image: "assets/images/gallery/avec l'ambasateur du japon.jpeg",
-            images: [
-              "assets/images/gallery/avec l'ambasateur du japon.jpeg"
-            ],
-            title: "Official Visit of the Japanese Ambassador to Lomé Port",
-            category: "cooperation",
-            categoryLabel: "Cooperation & Meetings",
-            date: "September 2026",
-            location: "Lomé Fishing Port, Togo",
-            caption: "Assistant Interpreter for the Ambassador of Japan in Côte d'Ivoire during his official visit to the Lomé Fishing Port."
-          }
-        ]
+        items: []
       },
       footer: {
         bio: "International Project Coordinator, institutional liaison expert, and multilingual interpreter dedicated to the success of development and infrastructure initiatives.",
