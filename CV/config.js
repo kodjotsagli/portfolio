@@ -45,6 +45,7 @@ const PORTFOLIO_CONFIG = {
         services: "Services",
         experience: "Expérience",
         projects: "Projets",
+        gallery: "Galerie",
         skills: "Compétences",
         education: "Formation",
         whyMe: "Pourquoi moi ?",
@@ -465,6 +466,30 @@ const PORTFOLIO_CONFIG = {
           error: "Une erreur est survenue lors de l'envoi."
         }
       },
+      gallery: {
+        sectionTag: "Preuves de Travail & Missions",
+        title: "Galerie & Preuves de Travail",
+        subtitle: "Documentation visuelle de mes missions de coordination sur le terrain, opérations portuaires, réunions institutionnelles et délégations internationales.",
+        filterAll: "Toutes les photos",
+        categories: [
+          { id: "all", label: "Toutes les photos" },
+          { id: "terrain", label: "Opérations de Terrain" },
+          { id: "cooperation", label: "Coopération & Réunions" },
+          { id: "evaluation", label: "Missions d'Évaluation" }
+        ],
+        btnBack: "Retour au portfolio",
+        btnViewFull: "Agrandir la photo",
+        emptyMessage: "Aucune photo pour le moment. Cliquez sur le bouton doré 'Ajouter une mission' ci-dessus pour ajouter vos photos de terrain avec leurs légendes !",
+        instructions: {
+          title: "💡 Comment ajouter vous-même vos nouvelles photos ?",
+          steps: [
+            "1. Cliquez simplement sur le bouton doré 'Ajouter une mission (1 à 5 photos)' ci-dessus.",
+            "2. Glissez-déposez vos photos, renseignez le titre, le lieu et la légende.",
+            "3. Validez et vos photos apparaissent instantanément dans la galerie !"
+          ]
+        },
+        items: []
+      },
       footer: {
         bio: "Coordinateur de projets internationaux, expert en liaison institutionnelle et interprète multilingue. Dédié à la réussite des initiatives de développement et d'infrastructures.",
         quickLinksTitle: "Navigation rapide",
@@ -485,6 +510,7 @@ const PORTFOLIO_CONFIG = {
         services: "Services",
         experience: "Experience",
         projects: "Projects",
+        gallery: "Gallery",
         skills: "Skills",
         education: "Education",
         whyMe: "Why Work With Me",
@@ -904,6 +930,30 @@ const PORTFOLIO_CONFIG = {
           success: "Thank you! Your message has been prepared successfully.",
           error: "An error occurred while sending your message."
         }
+      },
+      gallery: {
+        sectionTag: "Proof of Work & Field Missions",
+        title: "Field Gallery & Work Evidence",
+        subtitle: "Visual documentation of my project coordination missions, institutional meetings, and maritime/port field operations.",
+        filterAll: "All Photos",
+        categories: [
+          { id: "all", label: "All Photos" },
+          { id: "terrain", label: "Field Operations" },
+          { id: "cooperation", label: "Cooperation & Meetings" },
+          { id: "evaluation", label: "Assessment Missions" }
+        ],
+        btnBack: "Back to Portfolio",
+        btnViewFull: "View Full Size",
+        emptyMessage: "No photos yet. Click on the golden 'Add a mission' button above to upload your field photos with their captions!",
+        instructions: {
+          title: "💡 How to add your own photos easily?",
+          steps: [
+            "1. Simply click on the golden 'Add a mission (1 to 5 photos)' button above.",
+            "2. Drag and drop your photos, enter the title, location, and caption.",
+            "3. Submit and your photos appear instantly in the gallery!"
+          ]
+        },
+        items: []
       },
       footer: {
         bio: "International Project Coordinator, institutional liaison expert, and multilingual interpreter dedicated to the success of development and infrastructure initiatives.",

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 350" width="100%" height="100%">
+  <defs>
+    <linearGradient id="pilotBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#022C22"/>
+      <stop offset="50%" stop-color="#064E3B"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+    <linearGradient id="growthGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#34D399"/>
+      <stop offset="100%" stop-color="#A7F3D0"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="350" fill="url(#pilotBg)"/>
+  
+  <!-- Market Growth Curves / Geometric Network -->
+  <path d="M 50 240 Q 200 230, 320 160 T 550 80" fill="none" stroke="url(#growthGrad)" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 50 260 Q 220 250, 350 200 T 550 140" fill="none" stroke="rgba(52, 211, 153, 0.4)" stroke-width="2" stroke-dasharray="6,4"/>
+  
+  <!-- Target Points -->
+  <circle cx="200" cy="230" r="6" fill="#34D399"/>
+  <circle cx="320" cy="160" r="8" fill="#FFFFFF"/>
+  <circle cx="450" cy="115" r="6" fill="#34D399"/>
+  <circle cx="550" cy="80" r="10" fill="#FBBF24"/>
+
+  <!-- Badge -->
+  <rect x="40" y="40" width="220" height="34" rx="8" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+  <circle cx="58" cy="57" r="6" fill="#34D399"/>
+  <text x="74" y="62" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF" letter-spacing="0.5">Pilot Corporation</text>
+  
+  <text x="40" y="320" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#FFFFFF">Développement Commercial</text>
+  <text x="40" y="338" font-family="system-ui, sans-serif" font-size="12" font-weight="500" fill="rgba(255,255,255,0.8)">Analyse de marché, acquisition de clients &amp; croissance</text>
+</svg>
