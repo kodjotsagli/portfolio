@@ -78,12 +78,24 @@
       display: flex !important; /* Visible uniquement pour Kodjo */
     }
 
-    .card-delete-btn {
+    .card-actions-row,
+    .card-edit-btn,
+    .card-delete-btn,
+    .lightbox-admin-bar {
       display: none !important; /* Masqué aux visiteurs */
     }
 
+    body.admin-mode .card-actions-row {
+      display: flex !important; /* Visible uniquement pour Kodjo */
+    }
+
+    body.admin-mode .card-edit-btn,
     body.admin-mode .card-delete-btn {
       display: inline-flex !important; /* Visible uniquement pour Kodjo */
+    }
+
+    body.admin-mode .lightbox-admin-bar {
+      display: flex !important; /* Visible uniquement pour Kodjo */
     }
 
     /* Barre d'administration discrète et élégante */
@@ -395,24 +407,116 @@
     }
 
 
-    .card-delete-btn {
+    .card-actions-row {
+      display: none;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.5rem;
       margin-top: 0.85rem;
-      align-self: flex-end;
-      background: none;
-      border: none;
+      padding-top: 0.75rem;
+      border-top: 1px dashed var(--border-subtle);
+    }
+
+    body.admin-mode .card-actions-row {
+      display: flex !important;
+    }
+
+    .card-edit-btn {
+      background: rgba(2, 132, 199, 0.08);
+      border: 1px solid rgba(2, 132, 199, 0.25);
+      color: var(--color-primary);
+      font-size: 0.775rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.35rem 0.65rem;
+      border-radius: var(--radius-sm);
+      transition: all var(--transition-fast);
+    }
+
+    .card-edit-btn:hover {
+      background: var(--color-primary);
+      color: #FFFFFF;
+    }
+
+    .card-delete-btn {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.2);
       color: var(--color-danger, #EF4444);
       font-size: 0.775rem;
       font-weight: 600;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 0.3rem;
-      padding: 0.25rem 0.5rem;
+      gap: 0.35rem;
+      padding: 0.35rem 0.65rem;
       border-radius: var(--radius-sm);
+      transition: all var(--transition-fast);
     }
 
     .card-delete-btn:hover {
-      background-color: rgba(239, 68, 68, 0.1);
+      background-color: var(--color-danger, #EF4444);
+      color: #FFFFFF;
+    }
+
+    /* Actions gestionnaire dans la Lightbox */
+    .lightbox-admin-bar {
+      display: none;
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    body.admin-mode .lightbox-admin-bar {
+      display: flex !important;
+    }
+
+    .lightbox-edit-btn {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: #FFFFFF;
+      border: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 0.55rem 1.15rem;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);
+      transition: all var(--transition-fast);
+    }
+
+    .lightbox-edit-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.45);
+      background: linear-gradient(135deg, #0369a1, #075985);
+    }
+
+    .lightbox-delete-btn {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      color: #fca5a5;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.55rem 1.15rem;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all var(--transition-fast);
+    }
+
+    .lightbox-delete-btn:hover {
+      background: rgba(239, 68, 68, 0.9);
+      color: #FFFFFF;
+      border-color: transparent;
     }
 
     /* ===================================================
@@ -573,21 +677,28 @@
 
     .thumb-remove-btn {
       position: absolute;
-      top: 3px;
-      right: 3px;
-      width: 18px;
-      height: 18px;
+      top: 4px;
+      right: 4px;
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
       background: rgba(239, 68, 68, 0.95);
       color: #FFFFFF;
-      border: none;
+      border: 1.5px solid #FFFFFF;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 10px;
+      font-size: 11px;
       font-weight: bold;
-      transition: transform var(--transition-fast);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.35);
+      transition: transform var(--transition-fast), background var(--transition-fast);
+      z-index: 5;
+    }
+
+    .thumb-remove-btn:hover {
+      transform: scale(1.25);
+      background: #dc2626;
     }
 
     .thumb-remove-btn:hover {
@@ -1143,15 +1254,15 @@
         </svg>
       </button>
 
-      <h2 class="upload-title">
+      <h2 class="upload-title" id="uploadModalTitle">
         <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-gold);">
           <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
           <circle cx="8.5" cy="8.5" r="1.5"></circle>
           <polyline points="21 15 16 10 5 21"></polyline>
         </svg>
-        Ajouter une mission (1 à 5 photos)
+        <span id="uploadModalTitleText">Ajouter une mission (1 à 5 photos)</span>
       </h2>
-      <p class="upload-subtitle">Glissez-déposez entre 1 et 5 photos pour ce titre, ajoutez la légende et validez !</p>
+      <p class="upload-subtitle" id="uploadModalSubtitle">Glissez-déposez entre 1 et 5 photos pour ce titre, ajoutez la légende et validez !</p>
 
       <form id="uploadForm" novalidate>
         <!-- Message d'erreur ou d'état -->
@@ -1268,12 +1379,30 @@
         </div>
         <h3 class="lightbox-title" id="lightboxTitle">Titre de la photo</h3>
         <p class="lightbox-text" id="lightboxCaption">Légende complète de la photo...</p>
+
+        <!-- Barre de gestion de la mission pour Kodjo dans la Lightbox -->
+        <div class="lightbox-admin-bar" id="lightboxAdminBar">
+          <button type="button" class="lightbox-edit-btn" id="lightboxEditBtn" title="Modifier le titre, les textes ou ajouter/supprimer des photos">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg>
+            <span>Modifier texte ou photos</span>
+          </button>
+          <button type="button" class="lightbox-delete-btn" id="lightboxDeleteBtn" title="Supprimer définitivement cette mission de la galerie">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="3 6 5 6 21 6"></polyline>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            </svg>
+            <span>Supprimer cette mission</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Scripts -->
-  <script src="config.js?v=2.4"></script>
+  <script src="config.js?v=2.5"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // État
@@ -1284,6 +1413,7 @@
       let currentSubPhotoIndex = 0;
       let activeItemsList = [];
       let selectedPhotosList = []; // Array of { dataUrl, fileName, size } - min 1, max 5
+      let editingItemId = null; // ID de la mission en cours de modification (null si ajout)
 
       // Thème
       function applyTheme(theme) {
@@ -1644,15 +1774,22 @@
                 </div>
                 <h3 class="gallery-title">${item.title}</h3>
                 <p class="gallery-caption"><strong>Légende :</strong> ${item.caption}</p>
-                ${isCustom ? `
-                  <button class="card-delete-btn" data-delete-id="${item.id}">
-                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <div class="card-actions-row">
+                  <button type="button" class="card-edit-btn" data-edit-id="${item.id}" title="Modifier texte ou photos">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                    </svg>
+                    <span>Modifier</span>
+                  </button>
+                  <button type="button" class="card-delete-btn" data-delete-id="${item.id}" title="Supprimer cette mission">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                       <polyline points="3 6 5 6 21 6"></polyline>
                       <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
                     </svg>
-                    Supprimer cette mission
+                    <span>Supprimer</span>
                   </button>
-                ` : ''}
+                </div>
               </div>
             </div>
           `;
@@ -1661,9 +1798,22 @@
         // Clic sur carte -> ouvrir Lightbox
         grid.querySelectorAll('.gallery-card').forEach(card => {
           card.addEventListener('click', (e) => {
-            if (e.target.closest('.card-delete-btn')) return;
+            if (e.target.closest('.card-edit-btn') || e.target.closest('.card-delete-btn')) return;
             const idx = parseInt(card.getAttribute('data-index'), 10);
             openLightbox(idx, 0);
+          });
+        });
+
+        // Modifier depuis la carte
+        grid.querySelectorAll('.card-edit-btn').forEach(editBtn => {
+          editBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (!isAdminUser()) {
+              promptAdminLogin();
+              return;
+            }
+            const idToEdit = editBtn.getAttribute('data-edit-id');
+            openEditModal(idToEdit);
           });
         });
 
@@ -1706,6 +1856,71 @@
           promptAdminLogin();
           return;
         }
+        editingItemId = null;
+        const titleText = document.getElementById('uploadModalTitleText');
+        if (titleText) titleText.textContent = "Ajouter une mission (1 à 5 photos)";
+        const subtitleText = document.getElementById('uploadModalSubtitle');
+        if (subtitleText) subtitleText.textContent = "Glissez-déposez entre 1 et 5 photos pour ce titre, ajoutez la légende et validez !";
+        const submitBtnText = document.getElementById('btnSubmitPhotoText');
+        if (submitBtnText) submitBtnText.innerHTML = "✅ Ajouter à la Galerie";
+
+        resetUploadForm();
+        uploadModal.classList.add('active');
+        uploadModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function openEditModal(itemId) {
+        if (!isAdminUser()) {
+          promptAdminLogin();
+          return;
+        }
+
+        const allItems = getAllGalleryItems(currentLang);
+        const item = allItems.find(it => it.id === itemId);
+        if (!item) {
+          alert("Mission introuvable.");
+          return;
+        }
+
+        editingItemId = itemId;
+        hideUploadError();
+
+        const titleText = document.getElementById('uploadModalTitleText');
+        if (titleText) titleText.textContent = "✏️ Modifier la mission";
+        const subtitleText = document.getElementById('uploadModalSubtitle');
+        if (subtitleText) subtitleText.textContent = "Modifiez les textes (titre, légende, lieu, date...) ou ajoutez / supprimez des photos (1 à 5 max).";
+        const submitBtnText = document.getElementById('btnSubmitPhotoText');
+        if (submitBtnText) submitBtnText.innerHTML = "💾 Enregistrer les modifications";
+
+        const inputTitle = document.getElementById('inputTitle');
+        if (inputTitle) inputTitle.value = item.title || '';
+
+        const selectCategory = document.getElementById('selectCategory');
+        if (selectCategory) selectCategory.value = item.category || 'terrain';
+
+        const inputDate = document.getElementById('inputDate');
+        if (inputDate) inputDate.value = item.date || '';
+
+        const inputLocation = document.getElementById('inputLocation');
+        if (inputLocation) inputLocation.value = item.location || '';
+
+        const inputCaption = document.getElementById('inputCaption');
+        if (inputCaption) inputCaption.value = item.caption || '';
+
+        const photos = (item.images && item.images.length > 0) ? item.images : [item.image];
+        const fileNames = item.fileNames || [];
+        selectedPhotosList = photos.map((p, idx) => ({
+          dataUrl: p,
+          fileName: fileNames[idx] || `photo-${idx + 1}.jpg`,
+          size: 100000
+        }));
+
+        updateThumbsDisplay();
+
+        // Fermer la lightbox si ouverte
+        closeLightbox();
+
         uploadModal.classList.add('active');
         uploadModal.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
@@ -1739,6 +1954,7 @@
       function resetUploadForm() {
         uploadForm.reset();
         selectedPhotosList = [];
+        editingItemId = null;
         hideUploadError();
         updateThumbsDisplay();
       }
@@ -1928,7 +2144,7 @@
 
         const submitBtn = document.getElementById('btnSubmitPhoto');
         const submitText = document.getElementById('btnSubmitPhotoText');
-        const originalBtnText = submitText ? submitText.innerHTML : '✅ Ajouter à la Galerie';
+        const originalBtnText = submitText ? submitText.innerHTML : (editingItemId ? '💾 Enregistrer les modifications' : '✅ Ajouter à la Galerie');
 
         if (submitBtn) submitBtn.disabled = true;
         if (submitText) submitText.innerHTML = '⏳ Enregistrement en cours...';
@@ -1940,29 +2156,67 @@
             evaluation: "Missions d'Évaluation"
           };
 
-          const newItem = {
-            id: "custom-" + Date.now(),
-            image: selectedPhotosList[0].dataUrl, // Photo de couverture
-            images: selectedPhotosList.map(p => p.dataUrl), // Tableau de 1 à 5 photos
-            fileNames: selectedPhotosList.map(p => p.fileName),
-            photoCount: selectedPhotosList.length,
-            title: title,
-            category: category,
-            categoryLabel: catMap[category] || "Opérations de Terrain",
-            date: date,
-            location: location,
-            caption: caption,
-            isCustom: true
-          };
-
           const existingCustom = getCustomItems();
-          existingCustom.unshift(newItem);
-          saveCustomItems(existingCustom);
 
-          closeUploadModal();
-          renderPhotosGrid();
+          if (editingItemId) {
+            // MODE MODIFICATION
+            const targetId = editingItemId;
+            const updatedItem = {
+              id: targetId,
+              image: selectedPhotosList[0].dataUrl,
+              images: selectedPhotosList.map(p => p.dataUrl),
+              fileNames: selectedPhotosList.map(p => p.fileName),
+              photoCount: selectedPhotosList.length,
+              title: title,
+              category: category,
+              categoryLabel: catMap[category] || "Opérations de Terrain",
+              date: date,
+              location: location,
+              caption: caption,
+              isCustom: true
+            };
 
-          alert(`🎉 Mission ajoutée avec succès (${selectedPhotosList.length} photo(s)) !\n\nVotre photo et sa légende apparaissent maintenant directement dans votre galerie.`);
+            const idx = existingCustom.findIndex(it => it.id === targetId);
+            if (idx !== -1) {
+              existingCustom[idx] = updatedItem;
+            } else {
+              existingCustom.unshift(updatedItem);
+            }
+            saveCustomItems(existingCustom);
+            closeUploadModal();
+            renderPhotosGrid();
+
+            // Rouvrir la lightbox avec les données fraîches
+            const updatedIdx = activeItemsList.findIndex(it => it.id === targetId);
+            if (updatedIdx !== -1) {
+              openLightbox(updatedIdx, 0);
+            }
+
+            alert(`✅ Mission modifiée avec succès !\n\nLe texte et les ${selectedPhotosList.length} photo(s) ont été mis à jour.`);
+          } else {
+            // MODE AJOUT
+            const newItem = {
+              id: "custom-" + Date.now(),
+              image: selectedPhotosList[0].dataUrl, // Photo de couverture
+              images: selectedPhotosList.map(p => p.dataUrl), // Tableau de 1 à 5 photos
+              fileNames: selectedPhotosList.map(p => p.fileName),
+              photoCount: selectedPhotosList.length,
+              title: title,
+              category: category,
+              categoryLabel: catMap[category] || "Opérations de Terrain",
+              date: date,
+              location: location,
+              caption: caption,
+              isCustom: true
+            };
+
+            existingCustom.unshift(newItem);
+            saveCustomItems(existingCustom);
+            closeUploadModal();
+            renderPhotosGrid();
+
+            alert(`🎉 Mission ajoutée avec succès (${selectedPhotosList.length} photo(s)) !\n\nVotre photo et sa légende apparaissent maintenant directement dans votre galerie.`);
+          }
         } catch (err) {
           console.error("Erreur lors de l'enregistrement de la mission:", err);
           showUploadError("❌ Une erreur est survenue lors de l'enregistrement : " + err.message);
@@ -2087,6 +2341,36 @@
           lightboxSubCounter.style.display = 'none';
           lightboxThumbStrip.style.display = 'none';
           lightboxThumbStrip.innerHTML = '';
+        }
+
+        // Boutons admin dans la lightbox
+        const lightboxEditBtn = document.getElementById('lightboxEditBtn');
+        if (lightboxEditBtn) {
+          lightboxEditBtn.onclick = () => {
+            if (!isAdminUser()) {
+              promptAdminLogin();
+              return;
+            }
+            openEditModal(item.id);
+          };
+        }
+
+        const lightboxDeleteBtn = document.getElementById('lightboxDeleteBtn');
+        if (lightboxDeleteBtn) {
+          lightboxDeleteBtn.onclick = () => {
+            if (!isAdminUser()) {
+              promptAdminLogin();
+              return;
+            }
+            if (confirm("Voulez-vous supprimer cette mission de la galerie ?")) {
+              const currentCustom = getCustomItems();
+              const updated = currentCustom.filter(it => it.id !== item.id);
+              saveCustomItems(updated);
+              closeLightbox();
+              renderPhotosGrid();
+              alert("🗑️ Mission supprimée de la galerie.");
+            }
+          };
         }
 
         lightboxModal.classList.add('active');
