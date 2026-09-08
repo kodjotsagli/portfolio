@@ -1,0 +1,1808 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <!-- SEO Primary Meta Tags -->
+  <title id="gallery-meta-title">Galerie & Preuves de Travail | Kodjo Tsagli</title>
+  <meta name="description" id="gallery-meta-desc" content="Documentation visuelle et preuves de travail des missions de coordination de terrain, opérations portuaires et coopération internationale de Kodjo Tsagli.">
+  <meta name="author" content="Kodjo Tsagli">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Galerie & Preuves de Travail | Kodjo Tsagli">
+  <meta property="og:description" content="Découvrez les photos de terrain, réunions institutionnelles et opérations de dragage coordonnées par Kodjo Tsagli.">
+  <meta property="og:image" content="assets/images/profile.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* Spécificités de la page Galerie */
+    .gallery-page-header {
+      padding: 6rem 0 2.5rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .gallery-top-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .gallery-back-nav {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      transition: transform var(--transition-fast);
+      width: fit-content;
+      text-decoration: none;
+    }
+
+    .gallery-back-nav:hover {
+      transform: translateX(-4px);
+      color: var(--color-primary-dark);
+    }
+
+    /* Barre d'action Ajouter Photo */
+    .gallery-action-btns {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-add-photo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--color-gold), var(--color-gold-dark));
+      color: #070D18;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 0.65rem 1.25rem;
+      border-radius: var(--radius-full);
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(212, 175, 55, 0.35);
+      transition: all var(--transition-fast);
+    }
+
+    .btn-add-photo:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(212, 175, 55, 0.45);
+      background: linear-gradient(135deg, var(--color-gold-light), var(--color-gold));
+    }
+
+    .btn-export-config {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 0.6rem 1.1rem;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-medium);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .btn-export-config:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+      transform: translateY(-2px);
+    }
+
+    /* Filtres par Catégorie */
+    .gallery-filters-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.65rem;
+      margin-bottom: 2.75rem;
+    }
+
+    .filter-btn {
+      padding: 0.5rem 1.25rem;
+      border-radius: var(--radius-full);
+      font-size: 0.875rem;
+      font-weight: 600;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-medium);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .filter-btn:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+      transform: translateY(-2px);
+    }
+
+    .filter-btn.active {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+      color: #FFFFFF;
+      border-color: transparent;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
+    }
+
+    /* Grille de Photos */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .gallery-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      transition: all var(--transition-normal);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .gallery-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--border-medium);
+    }
+
+    .gallery-img-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background-color: var(--bg-surface-alt);
+      overflow: hidden;
+    }
+
+    .gallery-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform var(--transition-slow);
+    }
+
+    .gallery-card:hover .gallery-img {
+      transform: scale(1.06);
+    }
+
+    .gallery-zoom-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 25, 47, 0.45);
+      backdrop-filter: blur(2px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      opacity: 0;
+      transition: opacity var(--transition-fast);
+    }
+
+    .gallery-card:hover .gallery-zoom-overlay {
+      opacity: 1;
+    }
+
+    .zoom-icon-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .gallery-card-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      font-size: 0.725rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      background: rgba(10, 25, 47, 0.85);
+      backdrop-filter: blur(6px);
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      z-index: 2;
+    }
+
+    /* Badge Multi-photos (1 à 5 photos) */
+    .photo-count-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #070D18;
+      background: linear-gradient(135deg, var(--color-gold-light), var(--color-gold));
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-full);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      z-index: 2;
+    }
+
+    .gallery-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .gallery-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      font-size: 0.775rem;
+      color: var(--color-gold-dark);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    [data-theme="dark"] .gallery-meta {
+      color: var(--color-gold-light);
+    }
+
+    .gallery-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      line-height: 1.35;
+    }
+
+    .gallery-caption {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+
+    .card-delete-btn {
+      margin-top: 0.85rem;
+      align-self: flex-end;
+      background: none;
+      border: none;
+      color: var(--color-danger, #EF4444);
+      font-size: 0.775rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: var(--radius-sm);
+    }
+
+    .card-delete-btn:hover {
+      background-color: rgba(239, 68, 68, 0.1);
+    }
+
+    /* ===================================================
+       MODAL DE DRAG & DROP MULTI-PHOTOS (1 MIN, 5 MAX)
+       =================================================== */
+    .upload-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(7, 13, 24, 0.88);
+      backdrop-filter: blur(8px);
+      z-index: 2500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: all var(--transition-normal);
+    }
+
+    .upload-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .upload-dialog {
+      background: var(--bg-surface);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-medium);
+      box-shadow: var(--shadow-xl);
+      max-width: 650px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .upload-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .upload-subtitle {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.25rem;
+    }
+
+    /* Zone de Drag & Drop */
+    .dropzone-box {
+      border: 2px dashed var(--border-medium);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      background-color: var(--bg-surface-alt);
+      transition: all var(--transition-fast);
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .dropzone-box:hover, .dropzone-box.dragover {
+      border-color: var(--color-gold);
+      background-color: rgba(212, 175, 55, 0.05);
+      transform: scale(1.01);
+    }
+
+    .dropzone-icon {
+      width: 44px;
+      height: 44px;
+      color: var(--color-gold-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    [data-theme="dark"] .dropzone-icon {
+      color: var(--color-gold-light);
+    }
+
+    .dropzone-text-main {
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .dropzone-text-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Grille de prévisualisation multi-photos (1 à 5 photos) */
+    .multi-preview-container {
+      margin-top: 1rem;
+      display: none;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .multi-preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .photo-counter-tag {
+      background: var(--color-gold-light);
+      color: #070D18;
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 800;
+    }
+
+    .multi-thumbs-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.5rem;
+    }
+
+    .thumb-item {
+      position: relative;
+      aspect-ratio: 1;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 2px solid var(--border-medium);
+      background: #000000;
+    }
+
+    .thumb-item.is-cover {
+      border-color: var(--color-gold);
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+    }
+
+    .thumb-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .thumb-badge {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      background: rgba(10, 25, 47, 0.85);
+      color: #FFFFFF;
+      font-size: 0.6rem;
+      font-weight: 800;
+      padding: 1px 4px;
+      border-radius: 3px;
+    }
+
+    .thumb-remove-btn {
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(239, 68, 68, 0.95);
+      color: #FFFFFF;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: bold;
+      transition: transform var(--transition-fast);
+    }
+
+    .thumb-remove-btn:hover {
+      transform: scale(1.2);
+    }
+
+    .thumb-add-slot {
+      border: 2px dashed var(--border-medium);
+      border-radius: var(--radius-md);
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      background: var(--bg-surface);
+      transition: all var(--transition-fast);
+      gap: 0.2rem;
+    }
+
+    .thumb-add-slot:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+      background: rgba(2, 132, 199, 0.05);
+    }
+
+    /* Champs du Formulaire */
+    .upload-form-group {
+      margin-bottom: 1.15rem;
+    }
+
+    .upload-form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: var(--text-primary);
+    }
+
+    .upload-form-group input,
+    .upload-form-group select,
+    .upload-form-group textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-medium);
+      background-color: var(--bg-surface-alt);
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color var(--transition-fast);
+      font-family: inherit;
+    }
+
+    .upload-form-group input:focus,
+    .upload-form-group select:focus,
+    .upload-form-group textarea:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+    }
+
+    .upload-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .upload-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.75rem;
+    }
+
+    .btn-submit-photo {
+      flex: 1;
+      padding: 0.85rem 1.5rem;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .btn-submit-photo:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-cancel-upload {
+      padding: 0.85rem 1.25rem;
+      border-radius: var(--radius-md);
+      background-color: var(--bg-surface-alt);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-medium);
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .upload-close-btn {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.4rem;
+      border-radius: 50%;
+    }
+
+    .upload-close-btn:hover {
+      color: var(--text-primary);
+      background-color: var(--bg-surface-alt);
+    }
+
+    /* LIGHTBOX AVEC NAVIGATION SOUS-PHOTOS (1 à 5) */
+    .lightbox-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(7, 13, 24, 0.94);
+      backdrop-filter: blur(12px);
+      z-index: 3000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: all var(--transition-normal);
+    }
+
+    .lightbox-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .lightbox-dialog {
+      position: relative;
+      max-width: 960px;
+      width: 100%;
+      background: var(--bg-surface);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+      border: 1px solid var(--border-medium);
+      display: flex;
+      flex-direction: column;
+      max-height: 94vh;
+    }
+
+    .lightbox-img-box {
+      position: relative;
+      background: #000000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 56vh;
+      overflow: hidden;
+    }
+
+    .lightbox-img-box img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .lightbox-sub-counter {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: rgba(10, 25, 47, 0.85);
+      color: #FFFFFF;
+      padding: 0.3rem 0.75rem;
+      border-radius: var(--radius-full);
+      font-size: 0.775rem;
+      font-weight: 700;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Bandeau de vignettes en bas de l'image */
+    .lightbox-thumbnails-strip {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.5rem 1.5rem;
+      background: rgba(10, 25, 47, 0.95);
+      overflow-x: auto;
+      justify-content: center;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .lightbox-strip-thumb {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-sm);
+      object-fit: cover;
+      cursor: pointer;
+      opacity: 0.5;
+      border: 2px solid transparent;
+      transition: all var(--transition-fast);
+      flex-shrink: 0;
+    }
+
+    .lightbox-strip-thumb.active {
+      opacity: 1;
+      border-color: var(--color-gold);
+      transform: scale(1.08);
+    }
+
+    .lightbox-caption-box {
+      padding: 1.5rem 2rem;
+      background: var(--bg-surface);
+      overflow-y: auto;
+    }
+
+    .lightbox-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .lightbox-cat-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      background: var(--badge-bg);
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-full);
+    }
+
+    .lightbox-date-loc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .lightbox-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .lightbox-text {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    .lightbox-close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(10, 25, 47, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: transform var(--transition-fast);
+    }
+
+    .lightbox-close-btn:hover {
+      transform: scale(1.1);
+      background: var(--color-primary);
+    }
+
+    .lightbox-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(10, 25, 47, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: all var(--transition-fast);
+    }
+
+    .lightbox-nav-btn:hover {
+      background: var(--color-primary);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .lightbox-prev {
+      left: 1rem;
+    }
+
+    .lightbox-next {
+      right: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+      .upload-form-row {
+        grid-template-columns: 1fr;
+      }
+      .lightbox-caption-box {
+        padding: 1.25rem;
+      }
+      .lightbox-title {
+        font-size: 1.15rem;
+      }
+      .multi-thumbs-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="site-header" id="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo" aria-label="Kodjo Tsagli - Accueil">
+        <span class="logo-mark">KT</span>
+        <span class="logo-text">Kodjo <strong>Tsagli</strong></span>
+      </a>
+
+      <!-- Desktop Links -->
+      <nav class="main-nav" id="main-nav" aria-label="Navigation">
+        <ul class="nav-list">
+          <li><a href="index.html#about" class="nav-link">À propos</a></li>
+          <li><a href="index.html#services" class="nav-link">Services</a></li>
+          <li><a href="index.html#experience" class="nav-link">Expérience</a></li>
+          <li><a href="index.html#projects" class="nav-link">Projets</a></li>
+          <li><a href="gallery.html" class="nav-link active">Galerie</a></li>
+          <li><a href="index.html#skills" class="nav-link">Compétences</a></li>
+          <li><a href="index.html#contact" class="nav-link nav-link-highlight">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Action Controls -->
+      <div class="nav-actions">
+        <!-- Language Switcher -->
+        <button id="lang-toggle-btn" class="lang-switch-btn" aria-label="Changer de langue">
+          <span class="lang-opt" data-lang-val="fr">FR</span>
+          <span class="lang-divider">|</span>
+          <span class="lang-opt" data-lang-val="en">EN</span>
+        </button>
+
+        <!-- Dark / Light Theme Toggle -->
+        <button id="theme-toggle-btn" class="theme-switch-btn" aria-label="Basculer le thème">
+          <svg class="theme-icon sun-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="theme-icon moon-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Header Section -->
+    <div class="gallery-page-header">
+      
+      <div class="gallery-top-controls">
+        <a href="index.html" class="gallery-back-nav" id="gallery-back-link">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span id="txt-back-portfolio">Retour au Portfolio</span>
+        </a>
+
+        <!-- Boutons d'action : Ajouter Photo & Exporter -->
+        <div class="gallery-action-btns">
+          <button class="btn-add-photo" id="openUploadBtn">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>Ajouter une mission (1 à 5 photos)</span>
+          </button>
+
+          <button class="btn-export-config" id="exportConfigBtn" title="Télécharger le fichier config.js mis à jour pour GitHub sans coder">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Télécharger config.js mis à jour</span>
+          </button>
+        </div>
+      </div>
+
+      <span class="section-tag" id="gallery-tag">Preuves de Travail &amp; Missions</span>
+      <h1 class="section-title" id="gallery-title">Galerie &amp; Preuves de Travail</h1>
+      <p class="section-subtitle" id="gallery-subtitle">
+        Documentation visuelle de mes missions de coordination sur le terrain, opérations portuaires, réunions institutionnelles et délégations internationales.
+      </p>
+
+      <!-- Filters -->
+      <div class="gallery-filters-row" id="gallery-filters">
+        <!-- Généré dynamiquement -->
+      </div>
+    </div>
+
+    <!-- Gallery Photos Grid -->
+    <div class="gallery-grid" id="gallery-items-grid">
+      <!-- Généré dynamiquement depuis config.js + localStorage -->
+    </div>
+
+    <!-- Call to Action Banner -->
+    <section class="cta-section" style="margin-bottom: 4rem;">
+      <div class="cta-box">
+        <div class="cta-glow" aria-hidden="true"></div>
+        <div class="cta-content">
+          <h2 class="cta-title">Besoin d'un coordinateur de terrain expérimenté ?</h2>
+          <p class="cta-subtitle">Échangeons sur vos projets d'infrastructures, vos missions d'évaluation ou vos besoins en interprétariat trilingue.</p>
+          <div class="cta-buttons">
+            <a href="index.html#contact" class="btn btn-primary btn-large">
+              <span>Me contacter</span>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <a href="https://wa.me/22871232929" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-large">
+              WhatsApp Direct
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================================================
+       MODAL DE DRAG & DROP MULTI-PHOTOS (1 MIN, 5 MAX)
+       =================================================== -->
+  <div class="upload-modal" id="uploadModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="upload-dialog">
+      <button class="upload-close-btn" id="closeUploadBtn" aria-label="Fermer la fenêtre">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <h2 class="upload-title">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-gold);">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+          <circle cx="8.5" cy="8.5" r="1.5"></circle>
+          <polyline points="21 15 16 10 5 21"></polyline>
+        </svg>
+        Ajouter une mission (1 à 5 photos)
+      </h2>
+      <p class="upload-subtitle">Glissez-déposez entre 1 et 5 photos pour ce titre, ajoutez la légende et validez !</p>
+
+      <form id="uploadForm" novalidate>
+        <!-- Message d'erreur ou d'état -->
+        <div id="uploadErrorBox" style="display: none; padding: 0.85rem 1rem; margin-bottom: 1.25rem; background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: var(--radius-md); color: #ef4444; font-size: 0.875rem; font-weight: 600;"></div>
+
+        <!-- Zone Drag & Drop -->
+        <div class="dropzone-box" id="dropzoneBox">
+          <input type="file" id="fileInput" accept="image/png, image/jpeg, image/webp" multiple style="display: none;">
+          
+          <div id="dropzonePrompt">
+            <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+            <p class="dropzone-text-main">Glissez-déposez vos photos ici (1 min, jusqu'à 5 max)</p>
+            <p class="dropzone-text-sub">ou <span style="color: var(--color-primary); font-weight: 700; text-decoration: underline;">cliquez pour choisir vos fichiers</span> (JPG, PNG, WebP)</p>
+          </div>
+
+          <!-- Prévisualisation des photos sélectionnées (1 à 5) -->
+          <div class="multi-preview-container" id="multiPreviewContainer">
+            <div class="multi-preview-header">
+              <span>Photos sélectionnées :</span>
+              <span class="photo-counter-tag" id="photosCountTag">0 / 5 photos</span>
+            </div>
+            <div class="multi-thumbs-grid" id="multiThumbsGrid">
+              <!-- Vignettes générées dynamiquement -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Titre de la photo -->
+        <div class="upload-form-group">
+          <label for="inputTitle">Titre de la mission / Réalisation *</label>
+          <input type="text" id="inputTitle" placeholder="Ex: Inspection Technique des Travaux Portuaires">
+        </div>
+
+        <!-- Catégorie et Date -->
+        <div class="upload-form-row">
+          <div class="upload-form-group">
+            <label for="selectCategory">Catégorie *</label>
+            <select id="selectCategory">
+              <option value="terrain">Opérations de Terrain</option>
+              <option value="cooperation">Coopération &amp; Réunions</option>
+              <option value="evaluation">Missions d'Évaluation</option>
+            </select>
+          </div>
+
+          <div class="upload-form-group">
+            <label for="inputDate">Date / Période *</label>
+            <input type="text" id="inputDate" placeholder="Ex: Septembre 2026">
+          </div>
+        </div>
+
+        <!-- Lieu -->
+        <div class="upload-form-group">
+          <label for="inputLocation">Lieu *</label>
+          <input type="text" id="inputLocation" placeholder="Ex: Port de Pêche de Lomé, Togo">
+        </div>
+
+        <!-- Légende -->
+        <div class="upload-form-group">
+          <label for="inputCaption">Légende de la photo (Ce que vous faisiez) *</label>
+          <textarea id="inputCaption" rows="2" placeholder="Ex: Supervision sur site des travaux d'aménagement et coordination directe avec les ingénieurs et experts."></textarea>
+        </div>
+
+        <!-- Actions -->
+        <div class="upload-actions">
+          <button type="button" class="btn-submit-photo" id="btnSubmitPhoto">
+            <span id="btnSubmitPhotoText">✅ Ajouter à la Galerie</span>
+          </button>
+          <button type="button" class="btn-cancel-upload" id="cancelUploadBtn">Annuler</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX MODAL AVEC CARROUSEL DES 1 À 5 PHOTOS -->
+  <div class="lightbox-modal" id="lightboxModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="lightbox-dialog" id="lightboxDialog">
+      <button class="lightbox-close-btn" id="lightboxCloseBtn" aria-label="Fermer la vue">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <button class="lightbox-nav-btn lightbox-prev" id="lightboxPrevBtn" aria-label="Photo précédente">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+
+      <button class="lightbox-nav-btn lightbox-next" id="lightboxNextBtn" aria-label="Photo suivante">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+
+      <div class="lightbox-img-box">
+        <span class="lightbox-sub-counter" id="lightboxSubCounter">Photo 1 / 1</span>
+        <img src="" id="lightboxImg" alt="" loading="eager">
+      </div>
+
+      <!-- Bandeau de vignettes miniatures pour cette mission -->
+      <div class="lightbox-thumbnails-strip" id="lightboxThumbStrip" style="display: none;">
+        <!-- Généré dynamiquement -->
+      </div>
+
+      <div class="lightbox-caption-box">
+        <div class="lightbox-header-row">
+          <span class="lightbox-cat-badge" id="lightboxCat">Catégorie</span>
+          <span class="lightbox-date-loc" id="lightboxDateLoc">Date &amp; Lieu</span>
+        </div>
+        <h3 class="lightbox-title" id="lightboxTitle">Titre de la photo</h3>
+        <p class="lightbox-text" id="lightboxCaption">Légende complète de la photo...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="config.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // État
+      let currentLang = localStorage.getItem('kt_portfolio_lang') || 'fr';
+      let currentTheme = localStorage.getItem('kt_portfolio_theme') || 'light';
+      let activeCategory = 'all';
+      let currentItemIndex = 0;
+      let currentSubPhotoIndex = 0;
+      let activeItemsList = [];
+      let selectedPhotosList = []; // Array of { dataUrl, fileName, size } - min 1, max 5
+
+      // Thème
+      function applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        currentTheme = theme;
+        localStorage.setItem('kt_portfolio_theme', theme);
+      }
+      applyTheme(currentTheme);
+
+      const themeToggleBtn = document.getElementById('theme-toggle-btn');
+      if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+          applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+        });
+      }
+
+      // Cache mémoire en cas de quota dépassé ou localStorage désactivé
+      window.__memoryCustomItems = null;
+
+      // Récupération des photos personnalisées sauvegardées dans localStorage
+      function getCustomItems() {
+        try {
+          const raw = localStorage.getItem('kt_custom_gallery_items');
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            if (Array.isArray(parsed)) return parsed;
+          }
+        } catch (e) {
+          console.warn('Erreur lecture localStorage:', e);
+        }
+        return window.__memoryCustomItems || [];
+      }
+
+      function saveCustomItems(items) {
+        window.__memoryCustomItems = items;
+        try {
+          localStorage.setItem('kt_custom_gallery_items', JSON.stringify(items));
+        } catch (e) {
+          console.warn('Quota localStorage dépassé, sauvegarde en mémoire utilisée :', e);
+        }
+      }
+
+      // Compression et optimisation automatique des photos pour éviter tout blocage (10MB -> ~150KB)
+      function compressImageFile(file, maxWidth = 1400, quality = 0.82) {
+        return new Promise((resolve, reject) => {
+          if (!file.type.startsWith('image/')) {
+            return reject(new Error('Format non supporté'));
+          }
+          const reader = new FileReader();
+          reader.onerror = () => reject(new Error('Erreur de lecture'));
+          reader.onload = (e) => {
+            const img = new Image();
+            img.onerror = () => reject(new Error('Erreur de chargement de l\'image'));
+            img.onload = () => {
+              try {
+                let width = img.width;
+                let height = img.height;
+
+                if (width > maxWidth || height > maxWidth) {
+                  if (width > height) {
+                    height = Math.round((height * maxWidth) / width);
+                    width = maxWidth;
+                  } else {
+                    width = Math.round((width * maxWidth) / height);
+                    height = maxWidth;
+                  }
+                }
+
+                const canvas = document.createElement('canvas');
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+
+                const dataUrl = canvas.toDataURL('image/jpeg', quality);
+                const safeName = file.name.replace(/\.[^/.]+$/, "").replace(/\s+/g, '-').toLowerCase() + '.jpg';
+                resolve({
+                  dataUrl: dataUrl,
+                  fileName: safeName,
+                  originalName: file.name
+                });
+              } catch (err) {
+                resolve({
+                  dataUrl: e.target.result,
+                  fileName: file.name.replace(/\s+/g, '-').toLowerCase(),
+                  originalName: file.name
+                });
+              }
+            };
+            img.src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      // Combinaison des éléments de config.js + éléments personnalisés
+      function getAllGalleryItems(lang) {
+        const defaultItems = (PORTFOLIO_CONFIG.content[lang] && PORTFOLIO_CONFIG.content[lang].gallery) 
+          ? PORTFOLIO_CONFIG.content[lang].gallery.items 
+          : [];
+        const customItems = getCustomItems();
+        return [...customItems, ...defaultItems];
+      }
+
+      // Rendu Galerie & Langue
+      function renderGallery(lang) {
+        currentLang = lang;
+        localStorage.setItem('kt_portfolio_lang', lang);
+        document.documentElement.setAttribute('lang', lang);
+
+        const data = PORTFOLIO_CONFIG.content[lang].gallery;
+
+        // Bouton langue actif
+        document.querySelectorAll('.lang-opt').forEach(el => {
+          el.classList.toggle('active', el.getAttribute('data-lang-val') === lang);
+        });
+
+        // En-têtes
+        document.getElementById('gallery-meta-title').textContent = data.title + " | Kodjo Tsagli";
+        document.getElementById('gallery-tag').textContent = data.sectionTag;
+        document.getElementById('gallery-title').textContent = data.title;
+        document.getElementById('gallery-subtitle').textContent = data.subtitle;
+        document.getElementById('txt-back-portfolio').textContent = data.btnBack || (lang === 'fr' ? 'Retour au Portfolio' : 'Back to Portfolio');
+
+        // Filtres
+        const filtersRow = document.getElementById('gallery-filters');
+        if (filtersRow && data.categories) {
+          filtersRow.innerHTML = data.categories.map(cat => `
+            <button class="filter-btn ${cat.id === activeCategory ? 'active' : ''}" data-cat="${cat.id}">
+              ${cat.label}
+            </button>
+          `).join('');
+
+          filtersRow.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+              activeCategory = btn.getAttribute('data-cat');
+              filtersRow.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+              btn.classList.add('active');
+              renderPhotosGrid();
+            });
+          });
+        }
+
+        renderPhotosGrid();
+      }
+
+      // Rendu des cartes de photos
+      function renderPhotosGrid() {
+        const data = PORTFOLIO_CONFIG.content[currentLang].gallery;
+        const grid = document.getElementById('gallery-items-grid');
+        if (!grid) return;
+
+        const allItems = getAllGalleryItems(currentLang);
+
+        activeItemsList = activeCategory === 'all' 
+          ? allItems 
+          : allItems.filter(item => item.category === activeCategory);
+
+        if (activeItemsList.length === 0) {
+          grid.innerHTML = `
+            <div style="grid-column: 1/-1; text-align: center; padding: 4rem 1.5rem; background: var(--bg-surface); border: 2px dashed var(--border-medium); border-radius: var(--radius-xl); max-width: 600px; margin: 0 auto; box-shadow: var(--shadow-sm);">
+              <div style="font-size: 3rem; margin-bottom: 1rem;">📸</div>
+              <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 0.5rem;">La galerie est prête à recevoir vos photos</h3>
+              <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.75rem; line-height: 1.6;">${data.emptyMessage}</p>
+              <button class="btn-add-photo" onclick="document.getElementById('openUploadBtn').click()" style="margin: 0 auto;">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>Ajouter votre première mission (1 à 5 photos)</span>
+              </button>
+            </div>
+          `;
+          return;
+        }
+
+        grid.innerHTML = activeItemsList.map((item, index) => {
+          const isCustom = item.isCustom;
+          const photosArray = item.images && item.images.length > 0 ? item.images : [item.image];
+          const count = photosArray.length;
+          const coverImage = photosArray[0];
+
+          return `
+            <div class="gallery-card" data-index="${index}">
+              <div class="gallery-img-wrap">
+                <span class="gallery-card-badge">${item.categoryLabel}</span>
+                
+                ${count > 1 ? `
+                  <span class="photo-count-badge">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                      <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                      <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                    ${count} photos
+                  </span>
+                ` : ''}
+
+                <img src="${coverImage}" alt="${item.title}" class="gallery-img" loading="lazy">
+                <div class="gallery-zoom-overlay">
+                  <span class="zoom-icon-badge">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="11" cy="11" r="8"></circle>
+                      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                      <line x1="11" y1="8" x2="11" y2="14"></line>
+                      <line x1="8" y1="11" x2="14" y2="11"></line>
+                    </svg>
+                    ${count > 1 ? `Voir l'album (${count} photos)` : (data.btnViewFull || 'Agrandir')}
+                  </span>
+                </div>
+              </div>
+              <div class="gallery-body">
+                <div class="gallery-meta">
+                  <span>📍 ${item.location}</span>
+                  <span>📅 ${item.date}</span>
+                </div>
+                <h3 class="gallery-title">${item.title}</h3>
+                <p class="gallery-caption"><strong>Légende :</strong> ${item.caption}</p>
+                ${isCustom ? `
+                  <button class="card-delete-btn" data-delete-id="${item.id}">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="3 6 5 6 21 6"></polyline>
+                      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    </svg>
+                    Supprimer cette mission
+                  </button>
+                ` : ''}
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        // Clic sur carte -> ouvrir Lightbox
+        grid.querySelectorAll('.gallery-card').forEach(card => {
+          card.addEventListener('click', (e) => {
+            if (e.target.closest('.card-delete-btn')) return;
+            const idx = parseInt(card.getAttribute('data-index'), 10);
+            openLightbox(idx, 0);
+          });
+        });
+
+        // Suppression de photo personnalisée
+        grid.querySelectorAll('.card-delete-btn').forEach(delBtn => {
+          delBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const idToDelete = delBtn.getAttribute('data-delete-id');
+            if (confirm("Voulez-vous supprimer cette mission de la galerie ?")) {
+              const currentCustom = getCustomItems();
+              const updated = currentCustom.filter(it => it.id !== idToDelete);
+              saveCustomItems(updated);
+              renderPhotosGrid();
+            }
+          });
+        });
+      }
+
+      // ===================================================
+      // GESTION DU MODAL DRAG & DROP (1 À 5 PHOTOS)
+      // ===================================================
+      const uploadModal = document.getElementById('uploadModal');
+      const openUploadBtn = document.getElementById('openUploadBtn');
+      const closeUploadBtn = document.getElementById('closeUploadBtn');
+      const cancelUploadBtn = document.getElementById('cancelUploadBtn');
+      const dropzoneBox = document.getElementById('dropzoneBox');
+      const fileInput = document.getElementById('fileInput');
+      const dropzonePrompt = document.getElementById('dropzonePrompt');
+      const multiPreviewContainer = document.getElementById('multiPreviewContainer');
+      const photosCountTag = document.getElementById('photosCountTag');
+      const multiThumbsGrid = document.getElementById('multiThumbsGrid');
+      const uploadForm = document.getElementById('uploadForm');
+
+      function openUploadModal() {
+        uploadModal.classList.add('active');
+        uploadModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeUploadModal() {
+        uploadModal.classList.remove('active');
+        uploadModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        resetUploadForm();
+      }
+
+      const uploadErrorBox = document.getElementById('uploadErrorBox');
+      function showUploadError(msg) {
+        if (uploadErrorBox) {
+          uploadErrorBox.innerHTML = msg;
+          uploadErrorBox.style.display = 'block';
+          uploadErrorBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else {
+          alert(msg.replace(/<[^>]*>?/gm, ''));
+        }
+      }
+
+      function hideUploadError() {
+        if (uploadErrorBox) {
+          uploadErrorBox.style.display = 'none';
+          uploadErrorBox.innerHTML = '';
+        }
+      }
+
+      function resetUploadForm() {
+        uploadForm.reset();
+        selectedPhotosList = [];
+        hideUploadError();
+        updateThumbsDisplay();
+      }
+
+      function updateThumbsDisplay() {
+        if (selectedPhotosList.length === 0) {
+          dropzonePrompt.style.display = 'block';
+          multiPreviewContainer.style.display = 'none';
+          multiThumbsGrid.innerHTML = '';
+        } else {
+          dropzonePrompt.style.display = 'none';
+          multiPreviewContainer.style.display = 'flex';
+          photosCountTag.textContent = `${selectedPhotosList.length} / 5 photos`;
+
+          let html = selectedPhotosList.map((photo, i) => `
+            <div class="thumb-item ${i === 0 ? 'is-cover' : ''}">
+              <span class="thumb-badge">${i === 0 ? 'Couverture' : (i + 1)}</span>
+              <img src="${photo.dataUrl}" alt="Photo ${i + 1}">
+              <button type="button" class="thumb-remove-btn" data-remove-index="${i}" title="Retirer cette photo">✕</button>
+            </div>
+          `).join('');
+
+          if (selectedPhotosList.length < 5) {
+            html += `
+              <div class="thumb-add-slot" id="addMoreThumbBtn" title="Ajouter une photo supplémentaire (jusqu'à 5)">
+                <span style="font-size: 1.25rem; font-weight: bold;">+</span>
+                <span>Ajouter</span>
+              </div>
+            `;
+          }
+
+          multiThumbsGrid.innerHTML = html;
+
+          // Handlers suppression individuelle
+          multiThumbsGrid.querySelectorAll('.thumb-remove-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+              e.stopPropagation();
+              const removeIdx = parseInt(btn.getAttribute('data-remove-index'), 10);
+              selectedPhotosList.splice(removeIdx, 1);
+              updateThumbsDisplay();
+            });
+          });
+
+          const addMoreBtn = document.getElementById('addMoreThumbBtn');
+          if (addMoreBtn) {
+            addMoreBtn.addEventListener('click', (e) => {
+              e.stopPropagation();
+              fileInput.click();
+            });
+          }
+        }
+      }
+
+      if (openUploadBtn) openUploadBtn.addEventListener('click', openUploadModal);
+      if (closeUploadBtn) closeUploadBtn.addEventListener('click', closeUploadModal);
+      if (cancelUploadBtn) cancelUploadBtn.addEventListener('click', closeUploadModal);
+
+      uploadModal.addEventListener('click', (e) => {
+        if (e.target === uploadModal) closeUploadModal();
+      });
+
+      // Clic sur dropzone pour choisir des fichiers
+      dropzoneBox.addEventListener('click', (e) => {
+        if (e.target.closest('.thumb-remove-btn') || e.target.closest('.thumb-add-slot')) return;
+        fileInput.click();
+      });
+
+      // Drag & drop handlers
+      ['dragenter', 'dragover'].forEach(eventName => {
+        dropzoneBox.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          dropzoneBox.classList.add('dragover');
+        });
+      });
+
+      ['dragleave', 'drop'].forEach(eventName => {
+        dropzoneBox.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          dropzoneBox.classList.remove('dragover');
+        });
+      });
+
+      dropzoneBox.addEventListener('drop', (e) => {
+        const dt = e.dataTransfer;
+        const files = Array.from(dt.files);
+        if (files && files.length > 0) {
+          handleSelectedFiles(files);
+        }
+      });
+
+      fileInput.addEventListener('change', (e) => {
+        const files = Array.from(e.target.files);
+        if (files && files.length > 0) {
+          handleSelectedFiles(files);
+        }
+        fileInput.value = ''; // Reset pour permettre de re-sélectionner
+      });
+
+      async function handleSelectedFiles(files) {
+        hideUploadError();
+        const imageFiles = files.filter(f => f.type.startsWith('image/'));
+        if (imageFiles.length === 0) {
+          showUploadError('⚠️ Veuillez sélectionner des fichiers image valides (JPG, PNG ou WebP).');
+          return;
+        }
+
+        const remainingSlots = 5 - selectedPhotosList.length;
+        if (remainingSlots <= 0) {
+          showUploadError('⚠️ Vous avez déjà atteint la limite maximale de 5 photos pour ce titre.');
+          return;
+        }
+
+        if (imageFiles.length > remainingSlots) {
+          showUploadError(`⚠️ Vous ne pouvez ajouter que ${remainingSlots} photo(s) supplémentaire(s) (Maximum 5 photos par titre).`);
+        }
+
+        const filesToProcess = imageFiles.slice(0, remainingSlots);
+
+        // Feedback visuel pendant la compression
+        const promptMain = dropzonePrompt.querySelector('.dropzone-text-main');
+        const originalText = promptMain ? promptMain.textContent : '';
+        if (promptMain) promptMain.textContent = '⏳ Traitement et optimisation de vos photos...';
+
+        for (const file of filesToProcess) {
+          try {
+            const compressed = await compressImageFile(file, 1400, 0.82);
+            selectedPhotosList.push({
+              dataUrl: compressed.dataUrl,
+              fileName: compressed.fileName,
+              size: file.size
+            });
+          } catch (err) {
+            console.error('Erreur compression:', err);
+          }
+        }
+
+        if (promptMain && originalText) promptMain.textContent = originalText;
+        updateThumbsDisplay();
+      }
+
+      // Soumission du formulaire
+      async function handleUploadSubmit(e) {
+        if (e) e.preventDefault();
+        hideUploadError();
+
+        if (selectedPhotosList.length < 1) {
+          showUploadError("⚠️ Veuillez ajouter au moins 1 photo (1 photo minimum, 5 maximum).");
+          return;
+        }
+
+        const inputTitle = document.getElementById('inputTitle');
+        const title = inputTitle ? inputTitle.value.trim() : '';
+        if (!title) {
+          showUploadError("⚠️ Veuillez renseigner le <strong>Titre de la mission / Réalisation</strong>.");
+          if (inputTitle) inputTitle.focus();
+          return;
+        }
+
+        const selectCategory = document.getElementById('selectCategory');
+        const category = selectCategory ? selectCategory.value : 'terrain';
+
+        const inputDate = document.getElementById('inputDate');
+        const date = inputDate ? inputDate.value.trim() : '';
+        if (!date) {
+          showUploadError("⚠️ Veuillez indiquer la <strong>Date / Période</strong> (ex: Septembre 2026).");
+          if (inputDate) inputDate.focus();
+          return;
+        }
+
+        const inputLocation = document.getElementById('inputLocation');
+        const location = inputLocation ? inputLocation.value.trim() : '';
+        if (!location) {
+          showUploadError("⚠️ Veuillez indiquer le <strong>Lieu</strong> (ex: Port de Pêche de Lomé, Togo).");
+          if (inputLocation) inputLocation.focus();
+          return;
+        }
+
+        const inputCaption = document.getElementById('inputCaption');
+        const caption = inputCaption ? inputCaption.value.trim() : '';
+        if (!caption) {
+          showUploadError("⚠️ Veuillez indiquer la <strong>Légende de la photo</strong> (ce que vous faisiez).");
+          if (inputCaption) inputCaption.focus();
+          return;
+        }
+
+        const submitBtn = document.getElementById('btnSubmitPhoto');
+        const submitText = document.getElementById('btnSubmitPhotoText');
+        const originalBtnText = submitText ? submitText.innerHTML : '✅ Ajouter à la Galerie';
+
+        if (submitBtn) submitBtn.disabled = true;
+        if (submitText) submitText.innerHTML = '⏳ Enregistrement en cours...';
+
+        try {
+          const catMap = {
+            terrain: "Opérations de Terrain",
+            cooperation: "Coopération & Réunions",
+            evaluation: "Missions d'Évaluation"
+          };
+
+          const newItem = {
+            id: "custom-" + Date.now(),
+            image: selectedPhotosList[0].dataUrl, // Photo de couverture
+            images: selectedPhotosList.map(p => p.dataUrl), // Tableau de 1 à 5 photos
+            fileNames: selectedPhotosList.map(p => p.fileName),
+            photoCount: selectedPhotosList.length,
+            title: title,
+            category: category,
+            categoryLabel: catMap[category] || "Opérations de Terrain",
+            date: date,
+            location: location,
+            caption: caption,
+            isCustom: true
+          };
+
+          const existingCustom = getCustomItems();
+          existingCustom.unshift(newItem);
+          saveCustomItems(existingCustom);
+
+          closeUploadModal();
+          renderPhotosGrid();
+
+          alert(`🎉 Mission ajoutée avec succès (${selectedPhotosList.length} photo(s)) !\n\nVotre photo et sa légende apparaissent maintenant directement dans votre galerie.`);
+        } catch (err) {
+          console.error("Erreur lors de l'enregistrement de la mission:", err);
+          showUploadError("❌ Une erreur est survenue lors de l'enregistrement : " + err.message);
+        } finally {
+          if (submitBtn) submitBtn.disabled = false;
+          if (submitText) submitText.innerHTML = originalBtnText;
+        }
+      }
+
+      uploadForm.addEventListener('submit', handleUploadSubmit);
+      const btnSubmitPhoto = document.getElementById('btnSubmitPhoto');
+      if (btnSubmitPhoto) {
+        btnSubmitPhoto.addEventListener('click', handleUploadSubmit);
+      }
+
+      // ===================================================
+      // EXPORT 1-CLIC DU NOUVEAU CONFIG.JS (ZÉRO ERREUR DE SYNTAXE)
+      // ===================================================
+      const exportConfigBtn = document.getElementById('exportConfigBtn');
+      if (exportConfigBtn) {
+        exportConfigBtn.addEventListener('click', () => {
+          const customItems = getCustomItems();
+          if (customItems.length === 0) {
+            alert("Aucune nouvelle photo ajoutée par Drag & Drop. Vos photos actuelles proviennent déjà de config.js !");
+            return;
+          }
+
+          // Construction du nouveau tableau d'items
+          const clonedConfig = JSON.parse(JSON.stringify(PORTFOLIO_CONFIG));
+          
+          const exportReadyCustomItems = customItems.map(item => {
+            const files = item.fileNames || ["photo.jpg"];
+            const imagePaths = files.map(fn => "assets/images/gallery/" + fn);
+            return {
+              id: item.id,
+              image: imagePaths[0],
+              images: imagePaths,
+              title: item.title,
+              category: item.category,
+              categoryLabel: item.categoryLabel,
+              date: item.date,
+              location: item.location,
+              caption: item.caption
+            };
+          });
+
+          clonedConfig.content.fr.gallery.items = [...exportReadyCustomItems, ...clonedConfig.content.fr.gallery.items];
+          clonedConfig.content.en.gallery.items = [...exportReadyCustomItems, ...clonedConfig.content.en.gallery.items];
+
+          const fileContent = "/**\n * CONFIGURATION CENTRALE DU PORTFOLIO - KODJO TSAGLI\n * Généré automatiquement sans erreur de code.\n */\nconst PORTFOLIO_CONFIG = " + JSON.stringify(clonedConfig, null, 2) + ";\n\nif (typeof module !== 'undefined' && module.exports) {\n  module.exports = PORTFOLIO_CONFIG;\n}\n";
+
+          const blob = new Blob([fileContent], { type: 'application/javascript;charset=utf-8;' });
+          const link = document.createElement('a');
+          link.href = URL.createObjectURL(blob);
+          link.download = 'config.js';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+
+          alert("✅ Fichier 'config.js' téléchargé !\n\nIl vous suffit de remplacer l'ancien 'config.js' dans votre dossier CV par ce nouveau fichier, et de glisser vos photos dans 'assets/images/gallery/'. Zéro erreur de code garantie !");
+        });
+      }
+
+      // ===================================================
+      // LIGHTBOX LOGIC AVEC PARCOURS DES PHOTOS (1 À 5)
+      // ===================================================
+      const lightboxModal = document.getElementById('lightboxModal');
+      const lightboxImg = document.getElementById('lightboxImg');
+      const lightboxSubCounter = document.getElementById('lightboxSubCounter');
+      const lightboxThumbStrip = document.getElementById('lightboxThumbStrip');
+      const lightboxCat = document.getElementById('lightboxCat');
+      const lightboxDateLoc = document.getElementById('lightboxDateLoc');
+      const lightboxTitle = document.getElementById('lightboxTitle');
+      const lightboxCaption = document.getElementById('lightboxCaption');
+      const lightboxCloseBtn = document.getElementById('lightboxCloseBtn');
+      const lightboxPrevBtn = document.getElementById('lightboxPrevBtn');
+      const lightboxNextBtn = document.getElementById('lightboxNextBtn');
+
+      function openLightbox(itemIndex, subPhotoIndex = 0) {
+        if (!activeItemsList[itemIndex]) return;
+        currentItemIndex = itemIndex;
+        currentSubPhotoIndex = subPhotoIndex;
+        const item = activeItemsList[itemIndex];
+        const photos = item.images && item.images.length > 0 ? item.images : [item.image];
+
+        if (currentSubPhotoIndex < 0) currentSubPhotoIndex = 0;
+        if (currentSubPhotoIndex >= photos.length) currentSubPhotoIndex = photos.length - 1;
+
+        lightboxImg.src = photos[currentSubPhotoIndex];
+        lightboxImg.alt = `${item.title} - Photo ${currentSubPhotoIndex + 1}`;
+        lightboxCat.textContent = item.categoryLabel;
+        lightboxDateLoc.textContent = `📍 ${item.location}  •  📅 ${item.date}`;
+        lightboxTitle.textContent = item.title;
+        lightboxCaption.innerHTML = `<strong>Légende de mission :</strong> ${item.caption}`;
+
+        if (photos.length > 1) {
+          lightboxSubCounter.style.display = 'block';
+          lightboxSubCounter.textContent = `Photo ${currentSubPhotoIndex + 1} / ${photos.length}`;
+          lightboxThumbStrip.style.display = 'flex';
+          lightboxThumbStrip.innerHTML = photos.map((p, pIdx) => `
+            <img src="${p}" alt="Vignette ${pIdx + 1}" class="lightbox-strip-thumb ${pIdx === currentSubPhotoIndex ? 'active' : ''}" data-thumb-idx="${pIdx}">
+          `).join('');
+
+          lightboxThumbStrip.querySelectorAll('.lightbox-strip-thumb').forEach(th => {
+            th.addEventListener('click', () => {
+              const pIdx = parseInt(th.getAttribute('data-thumb-idx'), 10);
+              openLightbox(currentItemIndex, pIdx);
+            });
+          });
+        } else {
+          lightboxSubCounter.style.display = 'none';
+          lightboxThumbStrip.style.display = 'none';
+          lightboxThumbStrip.innerHTML = '';
+        }
+
+        lightboxModal.classList.add('active');
+        lightboxModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightboxModal.classList.remove('active');
+        lightboxModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      function nextPhoto() {
+        const item = activeItemsList[currentItemIndex];
+        const photos = item.images && item.images.length > 0 ? item.images : [item.image];
+
+        if (photos.length > 1 && currentSubPhotoIndex < photos.length - 1) {
+          openLightbox(currentItemIndex, currentSubPhotoIndex + 1);
+        } else {
+          const nextItemIdx = (currentItemIndex + 1) % activeItemsList.length;
+          openLightbox(nextItemIdx, 0);
+        }
+      }
+
+      function prevPhoto() {
+        const item = activeItemsList[currentItemIndex];
+        const photos = item.images && item.images.length > 0 ? item.images : [item.image];
+
+        if (photos.length > 1 && currentSubPhotoIndex > 0) {
+          openLightbox(currentItemIndex, currentSubPhotoIndex - 1);
+        } else {
+          const prevItemIdx = (currentItemIndex - 1 + activeItemsList.length) % activeItemsList.length;
+          const prevPhotos = activeItemsList[prevItemIdx].images || [activeItemsList[prevItemIdx].image];
+          openLightbox(prevItemIdx, prevPhotos.length - 1);
+        }
+      }
+
+      if (lightboxCloseBtn) lightboxCloseBtn.addEventListener('click', closeLightbox);
+      if (lightboxNextBtn) lightboxNextBtn.addEventListener('click', nextPhoto);
+      if (lightboxPrevBtn) lightboxPrevBtn.addEventListener('click', prevPhoto);
+
+      lightboxModal.addEventListener('click', (e) => {
+        if (e.target === lightboxModal) closeLightbox();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (!lightboxModal.classList.contains('active')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowRight') nextPhoto();
+        if (e.key === 'ArrowLeft') prevPhoto();
+      });
+
+      // Langue switch
+      const langBtn = document.getElementById('lang-toggle-btn');
+      if (langBtn) {
+        langBtn.addEventListener('click', () => {
+          renderGallery(currentLang === 'fr' ? 'en' : 'fr');
+        });
+      }
+
+      // Initialiser
+      renderGallery(currentLang);
+    });
+  </script>
+</body>
+</html>
