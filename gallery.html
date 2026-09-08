@@ -1273,7 +1273,7 @@
   </div>
 
   <!-- Scripts -->
-  <script src="config.js"></script>
+  <script src="config.js?v=2.3"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // État
@@ -1429,11 +1429,104 @@
         });
       }
 
-      // Combinaison des éléments de config.js + éléments personnalisés
+      // ===================================================
+      // CONFIGURATION DE SECOURS (ANTI-PAGE BLANCHE / CDN CACHE)
+      // Si config.js sur GitHub est en cache ou incomplet, cette
+      // configuration garantit que les photos et légendes s'affichent
+      // toujours immédiatement pour tous les visiteurs.
+      // ===================================================
+      const DEFAULT_GALLERY_FALLBACK = {
+        fr: {
+          sectionTag: "Preuves de Travail & Missions",
+          title: "Galerie & Preuves de Travail",
+          subtitle: "Documentation visuelle de mes missions de coordination sur le terrain, opérations portuaires, réunions institutionnelles et délégations internationales.",
+          filterAll: "Toutes les photos",
+          categories: [
+            { id: "all", label: "Toutes les photos" },
+            { id: "terrain", label: "Opérations de Terrain" },
+            { id: "cooperation", label: "Coopération & Réunions" },
+            { id: "evaluation", label: "Missions d'Évaluation" }
+          ],
+          btnBack: "Retour au portfolio",
+          btnViewFull: "Agrandir la photo",
+          emptyMessage: "Aucune photo pour le moment.",
+          items: [
+            {
+              id: "visite-ambassadeur-japon",
+              image: "assets/images/gallery/avec l'ambasateur du japon.jpeg",
+              images: [
+                "assets/images/gallery/avec l'ambasateur du japon.jpeg"
+              ],
+              title: "Visite Officielle de l'Ambassadeur du Japon au Port de Lomé",
+              category: "cooperation",
+              categoryLabel: "Coopération & Réunions",
+              date: "Septembre 2026",
+              location: "Port de Pêche de Lomé, Togo",
+              caption: "Assistant Interprète de l'Ambassadeur du Japon en Côte d'Ivoire en visite officielle au Port de Pêche de Lomé."
+            }
+          ]
+        },
+        en: {
+          sectionTag: "Proof of Work & Field Missions",
+          title: "Field Gallery & Work Evidence",
+          subtitle: "Visual documentation of my project coordination missions, institutional meetings, and maritime/port field operations.",
+          filterAll: "All Photos",
+          categories: [
+            { id: "all", label: "All Photos" },
+            { id: "terrain", label: "Field Operations" },
+            { id: "cooperation", label: "Cooperation & Meetings" },
+            { id: "evaluation", label: "Assessment Missions" }
+          ],
+          btnBack: "Back to Portfolio",
+          btnViewFull: "View Full Size",
+          emptyMessage: "No photos yet.",
+          items: [
+            {
+              id: "visite-ambassadeur-japon",
+              image: "assets/images/gallery/avec l'ambasateur du japon.jpeg",
+              images: [
+                "assets/images/gallery/avec l'ambasateur du japon.jpeg"
+              ],
+              title: "Official Visit of the Japanese Ambassador to Lomé Port",
+              category: "cooperation",
+              categoryLabel: "Cooperation & Meetings",
+              date: "September 2026",
+              location: "Lomé Fishing Port, Togo",
+              caption: "Assistant Interpreter for the Ambassador of Japan in Côte d'Ivoire during his official visit to the Lomé Fishing Port."
+            }
+          ]
+        }
+      };
+
+      // Récupération ultra-résiliente des données de la galerie
+      function getGalleryData(lang) {
+        const langKey = (lang === 'en') ? 'en' : 'fr';
+        const fallback = DEFAULT_GALLERY_FALLBACK[langKey] || DEFAULT_GALLERY_FALLBACK.fr;
+        
+        try {
+          if (typeof PORTFOLIO_CONFIG !== 'undefined' &&
+              PORTFOLIO_CONFIG &&
+              PORTFOLIO_CONFIG.content &&
+              PORTFOLIO_CONFIG.content[langKey] &&
+              PORTFOLIO_CONFIG.content[langKey].gallery) {
+            const cfg = PORTFOLIO_CONFIG.content[langKey].gallery;
+            const items = (Array.isArray(cfg.items) && cfg.items.length > 0) ? cfg.items : fallback.items;
+            return {
+              ...fallback,
+              ...cfg,
+              items: items
+            };
+          }
+        } catch (e) {
+          console.warn("Utilisation de la configuration galerie de secours :", e);
+        }
+        return fallback;
+      }
+
+      // Combinaison des éléments de config.js (ou secours) + éléments personnalisés
       function getAllGalleryItems(lang) {
-        const defaultItems = (PORTFOLIO_CONFIG.content[lang] && PORTFOLIO_CONFIG.content[lang].gallery) 
-          ? PORTFOLIO_CONFIG.content[lang].gallery.items 
-          : [];
+        const galleryData = getGalleryData(lang);
+        const defaultItems = galleryData.items || [];
         const customItems = getCustomItems();
         return [...customItems, ...defaultItems];
       }
@@ -1444,7 +1537,7 @@
         localStorage.setItem('kt_portfolio_lang', lang);
         document.documentElement.setAttribute('lang', lang);
 
-        const data = PORTFOLIO_CONFIG.content[lang].gallery;
+        const data = getGalleryData(lang);
 
         // Bouton langue actif
         document.querySelectorAll('.lang-opt').forEach(el => {
@@ -1452,11 +1545,16 @@
         });
 
         // En-têtes
-        document.getElementById('gallery-meta-title').textContent = data.title + " | Kodjo Tsagli";
-        document.getElementById('gallery-tag').textContent = data.sectionTag;
-        document.getElementById('gallery-title').textContent = data.title;
-        document.getElementById('gallery-subtitle').textContent = data.subtitle;
-        document.getElementById('txt-back-portfolio').textContent = data.btnBack || (lang === 'fr' ? 'Retour au Portfolio' : 'Back to Portfolio');
+        const metaTitleEl = document.getElementById('gallery-meta-title');
+        if (metaTitleEl) metaTitleEl.textContent = (data.title || "Galerie") + " | Kodjo Tsagli";
+        const tagEl = document.getElementById('gallery-tag');
+        if (tagEl) tagEl.textContent = data.sectionTag || "";
+        const titleEl = document.getElementById('gallery-title');
+        if (titleEl) titleEl.textContent = data.title || "Galerie";
+        const subtitleEl = document.getElementById('gallery-subtitle');
+        if (subtitleEl) subtitleEl.textContent = data.subtitle || "";
+        const backBtnEl = document.getElementById('txt-back-portfolio');
+        if (backBtnEl) backBtnEl.textContent = data.btnBack || (lang === 'fr' ? 'Retour au Portfolio' : 'Back to Portfolio');
 
         // Filtres
         const filtersRow = document.getElementById('gallery-filters');
@@ -1482,7 +1580,7 @@
 
       // Rendu des cartes de photos
       function renderPhotosGrid() {
-        const data = PORTFOLIO_CONFIG.content[currentLang].gallery;
+        const data = getGalleryData(currentLang);
         const grid = document.getElementById('gallery-items-grid');
         if (!grid) return;
 
@@ -1544,7 +1642,7 @@
                   </span>
                 ` : ''}
 
-                <img src="${coverImage}" alt="${item.title}" class="gallery-img" loading="lazy">
+                <img src="${coverImage}" alt="${item.title}" class="gallery-img" loading="lazy" onerror="if(!this.dataset.fallbackTried){this.dataset.fallbackTried='true';this.src='assets/images/gallery/ambassadeur-japon-lome.jpg';}">
                 <div class="gallery-zoom-overlay">
                   <span class="zoom-icon-badge">
                     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1911,7 +2009,14 @@
           }
 
           // Construction du nouveau tableau d'items
-          const clonedConfig = JSON.parse(JSON.stringify(PORTFOLIO_CONFIG));
+          const clonedConfig = JSON.parse(JSON.stringify(typeof PORTFOLIO_CONFIG !== 'undefined' ? PORTFOLIO_CONFIG : {}));
+          if (!clonedConfig.content) clonedConfig.content = {};
+          if (!clonedConfig.content.fr) clonedConfig.content.fr = {};
+          if (!clonedConfig.content.en) clonedConfig.content.en = {};
+          if (!clonedConfig.content.fr.gallery) clonedConfig.content.fr.gallery = JSON.parse(JSON.stringify(DEFAULT_GALLERY_FALLBACK.fr));
+          if (!clonedConfig.content.en.gallery) clonedConfig.content.en.gallery = JSON.parse(JSON.stringify(DEFAULT_GALLERY_FALLBACK.en));
+          if (!Array.isArray(clonedConfig.content.fr.gallery.items)) clonedConfig.content.fr.gallery.items = [];
+          if (!Array.isArray(clonedConfig.content.en.gallery.items)) clonedConfig.content.en.gallery.items = [];
           
           const exportReadyCustomItems = customItems.map(item => {
             const files = item.fileNames || ["photo.jpg"];
@@ -1969,8 +2074,12 @@
         const photos = item.images && item.images.length > 0 ? item.images : [item.image];
 
         if (currentSubPhotoIndex < 0) currentSubPhotoIndex = 0;
-        if (currentSubPhotoIndex >= photos.length) currentSubPhotoIndex = photos.length - 1;
-
+        lightboxImg.onerror = function() {
+          if (!this.dataset.fallbackTried) {
+            this.dataset.fallbackTried = 'true';
+            this.src = 'assets/images/gallery/ambassadeur-japon-lome.jpg';
+          }
+        };
         lightboxImg.src = photos[currentSubPhotoIndex];
         lightboxImg.alt = `${item.title} - Photo ${currentSubPhotoIndex + 1}`;
         lightboxCat.textContent = item.categoryLabel;
