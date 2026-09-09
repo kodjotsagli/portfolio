@@ -490,6 +490,41 @@ const PORTFOLIO_CONFIG = {
         },
         items: [
           {
+            id: "interprete-jica-ministere",
+            image: "assets/images/gallery/interprete-jica-ministere.jpg",
+            images: [
+              "assets/images/gallery/interprete-jica-ministere.jpg"
+            ],
+            fileNames: ["interprete-jica-ministere.jpg"],
+            photoCount: 1,
+            title: "Interprète",
+            category: "cooperation",
+            categoryLabel: "Coopération & Réunions",
+            date: "Août 2025",
+            location: "Lomé",
+            caption: "Interprète entre Le Ministère des Ressources Halieutiques, Animales et de la Réglementation de la Transhumance et la JICA",
+            proofDetails: "Mission d'interprétariat et d'appui linguistique stratégique entre les cadres du Ministère et la délégation de l'Agence Japonaise de Coopération Internationale (JICA)."
+          },
+          {
+            id: "consultant-business-development-pilot",
+            image: "assets/images/gallery/consultant-pilot-1.jpg",
+            images: [
+              "assets/images/gallery/consultant-pilot-1.jpg",
+              "assets/images/gallery/consultant-pilot-2.jpg",
+              "assets/images/gallery/consultant-pilot-3.jpg",
+              "assets/images/gallery/consultant-pilot-4.jpg"
+            ],
+            fileNames: ["consultant-pilot-1.jpg", "consultant-pilot-2.jpg", "consultant-pilot-3.jpg", "consultant-pilot-4.jpg"],
+            photoCount: 4,
+            title: "Consultant Business Development : analyse de marché et acquisition de clients.",
+            category: "terrain",
+            categoryLabel: "Opérations de Terrain",
+            date: "Juillet 2026",
+            location: "Lomé",
+            caption: "Identification de nouveaux segments porteurs et contractualisation de nouveaux partenariats avec l'entreprise japonaise PILOT",
+            proofDetails: "Prospection terrain, étude de marché approfondie et négociation de partenariats commerciaux stratégiques pour le développement de PILOT au Togo et dans la sous-région."
+          },
+          {
             id: "interprete-fr-ewe",
             image: "assets/images/gallery/interprete-fr-ewe-1.jpg",
             images: [
@@ -973,6 +1008,41 @@ const PORTFOLIO_CONFIG = {
           ]
         },
         items: [
+          {
+            id: "interprete-jica-ministere",
+            image: "assets/images/gallery/interprete-jica-ministere.jpg",
+            images: [
+              "assets/images/gallery/interprete-jica-ministere.jpg"
+            ],
+            fileNames: ["interprete-jica-ministere.jpg"],
+            photoCount: 1,
+            title: "Interpreter",
+            category: "cooperation",
+            categoryLabel: "Cooperation & Meetings",
+            date: "August 2025",
+            location: "Lomé, Togo",
+            caption: "Interpreter between the Ministry of Fishery and Animal Resources and JICA",
+            proofDetails: "High-level consecutive interpretation and linguistic facilitation between ministry officials and the Japan International Cooperation Agency (JICA) delegation."
+          },
+          {
+            id: "consultant-business-development-pilot",
+            image: "assets/images/gallery/consultant-pilot-1.jpg",
+            images: [
+              "assets/images/gallery/consultant-pilot-1.jpg",
+              "assets/images/gallery/consultant-pilot-2.jpg",
+              "assets/images/gallery/consultant-pilot-3.jpg",
+              "assets/images/gallery/consultant-pilot-4.jpg"
+            ],
+            fileNames: ["consultant-pilot-1.jpg", "consultant-pilot-2.jpg", "consultant-pilot-3.jpg", "consultant-pilot-4.jpg"],
+            photoCount: 4,
+            title: "Business Development Consultant: Market Analysis & Client Acquisition",
+            category: "terrain",
+            categoryLabel: "Field Operations",
+            date: "July 2026",
+            location: "Lomé, Togo",
+            caption: "Identification of high-growth market segments and strategic partnership onboarding with Japanese corporation PILOT",
+            proofDetails: "Field assessment, thorough market analysis, and commercial partnership structuring for PILOT expansion in Togo and West Africa."
+          },
           {
             id: "interprete-fr-ewe",
             image: "assets/images/gallery/interprete-fr-ewe-1.jpg",
