@@ -291,9 +291,11 @@
     .gallery-img-wrap {
       position: relative;
       width: 100%;
+      min-height: 220px;
       aspect-ratio: 4 / 3;
       background-color: var(--bg-surface-alt);
       overflow: hidden;
+      display: block;
     }
 
     .gallery-img {
@@ -1017,6 +1019,14 @@
       .upload-form-row {
         grid-template-columns: 1fr;
       }
+      .lightbox-dialog {
+        max-height: 96vh;
+        overflow-y: auto;
+      }
+      .lightbox-img-box {
+        height: 42vh;
+        min-height: 200px;
+      }
       .lightbox-caption-box {
         padding: 1.25rem;
       }
@@ -1402,12 +1412,40 @@
   </div>
 
   <!-- Scripts -->
-  <script src="config.js?v=2.5"></script>
+  <script src="config.js?v=3.0"></script>
   <script>
+    // Gestionnaire global d'erreur d'image (robuste mobile et web)
+    function handleImgError(img) {
+      if (!img.dataset.fallbackTried) {
+        img.dataset.fallbackTried = 'true';
+        img.src = 'assets/images/gallery/interprete-fr-ewe-1.jpg';
+      }
+    }
+    window.handleImgError = handleImgError;
+
     document.addEventListener('DOMContentLoaded', () => {
+      // Stockage sécurisé (anti-crash sur mobile Safari en mode navigation privée)
+      const safeStorage = {
+        get: (key, fallback = null) => {
+          try { return localStorage.getItem(key) ?? fallback; } catch (e) { return fallback; }
+        },
+        set: (key, val) => {
+          try { localStorage.setItem(key, val); } catch (e) {}
+        },
+        remove: (key) => {
+          try { localStorage.removeItem(key); } catch (e) {}
+        }
+      };
+
+      // Nettoyage automatique des anciens éléments de test / cartes obsolètes en cache
+      if (safeStorage.get('kt_gallery_cleanup_v3') !== 'true') {
+        safeStorage.remove('kt_custom_gallery_items');
+        safeStorage.set('kt_gallery_cleanup_v3', 'true');
+      }
+
       // État
-      let currentLang = localStorage.getItem('kt_portfolio_lang') || 'fr';
-      let currentTheme = localStorage.getItem('kt_portfolio_theme') || 'light';
+      let currentLang = safeStorage.get('kt_portfolio_lang', 'fr');
+      let currentTheme = safeStorage.get('kt_portfolio_theme', 'light');
       let activeCategory = 'all';
       let currentItemIndex = 0;
       let currentSubPhotoIndex = 0;
@@ -1419,7 +1457,7 @@
       function applyTheme(theme) {
         document.documentElement.setAttribute('data-theme', theme);
         currentTheme = theme;
-        localStorage.setItem('kt_portfolio_theme', theme);
+        safeStorage.set('kt_portfolio_theme', theme);
       }
       applyTheme(currentTheme);
 
@@ -1438,15 +1476,15 @@
       const ADMIN_CODES = ['ts@glee228', 'Ts@glee228'];
 
       function isAdminUser() {
-        return localStorage.getItem('kt_portfolio_admin_auth') === 'authenticated';
+        return safeStorage.get('kt_portfolio_admin_auth') === 'authenticated';
       }
 
       function setAdminMode(enable) {
         if (enable) {
-          localStorage.setItem('kt_portfolio_admin_auth', 'authenticated');
+          safeStorage.set('kt_portfolio_admin_auth', 'authenticated');
           document.body.classList.add('admin-mode');
         } else {
-          localStorage.removeItem('kt_portfolio_admin_auth');
+          safeStorage.remove('kt_portfolio_admin_auth');
           document.body.classList.remove('admin-mode');
         }
         renderPhotosGrid();
@@ -1466,14 +1504,18 @@
       }
 
       // Détection automatique via URL (ex: gallery.html?admin ou gallery.html?admin=Ts@glee228)
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.has('admin')) {
-        const paramVal = (urlParams.get('admin') || '').trim();
-        if (paramVal === ADMIN_PASSWORD || ADMIN_CODES.includes(paramVal.toLowerCase())) {
-          setAdminMode(true);
-        } else if (!isAdminUser()) {
-          promptAdminLogin();
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('admin')) {
+          const paramVal = (urlParams.get('admin') || '').trim();
+          if (paramVal === ADMIN_PASSWORD || ADMIN_CODES.includes(paramVal.toLowerCase())) {
+            setAdminMode(true);
+          } else if (!isAdminUser()) {
+            promptAdminLogin();
+          }
         }
+      } catch (e) {
+        console.warn('URL parsing notice:', e);
       }
 
       // Appliquer l'état sauvegardé dans le navigateur de Kodjo
@@ -1487,18 +1529,11 @@
       // Récupération des photos personnalisées sauvegardées dans localStorage
       function getCustomItems() {
         try {
-          const raw = localStorage.getItem('kt_custom_gallery_items');
+          const raw = safeStorage.get('kt_custom_gallery_items');
           if (raw) {
             const parsed = JSON.parse(raw);
             if (Array.isArray(parsed)) {
-              const cleaned = parsed.filter(it => 
-                it.id !== 'visite-ambassadeur-japon' && 
-                !it.title?.includes('Ambassadeur')
-              );
-              if (cleaned.length !== parsed.length) {
-                localStorage.setItem('kt_custom_gallery_items', JSON.stringify(cleaned));
-              }
-              return cleaned;
+              return parsed;
             }
           }
         } catch (e) {
@@ -1510,7 +1545,7 @@
       function saveCustomItems(items) {
         window.__memoryCustomItems = items;
         try {
-          localStorage.setItem('kt_custom_gallery_items', JSON.stringify(items));
+          safeStorage.set('kt_custom_gallery_items', JSON.stringify(items));
         } catch (e) {
           console.warn('Quota localStorage dépassé, sauvegarde en mémoire utilisée :', e);
         }
@@ -1590,7 +1625,26 @@
           btnBack: "Retour au portfolio",
           btnViewFull: "Agrandir la photo",
           emptyMessage: "Aucune photo pour le moment.",
-          items: []
+          items: [
+            {
+              id: "interprete-fr-ewe",
+              image: "assets/images/gallery/interprete-fr-ewe-1.jpg",
+              images: [
+                "assets/images/gallery/interprete-fr-ewe-1.jpg",
+                "assets/images/gallery/interprete-fr-ewe-2.jpg",
+                "assets/images/gallery/interprete-fr-ewe-3.jpg"
+              ],
+              fileNames: ["interprete-fr-ewe-1.jpg", "interprete-fr-ewe-2.jpg", "interprete-fr-ewe-3.jpg"],
+              photoCount: 3,
+              title: "Interprète: Fr-Ewe",
+              category: "terrain",
+              categoryLabel: "Opérations de Terrain",
+              date: "Septembre 2026",
+              location: "Port de Pêche de Lomé",
+              caption: "Assistant Interprète de l'ambassadeur du Japon en Côte d'Ivoire en Visite à Lomé",
+              proofDetails: "Interprétariat consécutif de haut niveau et médiation linguistique trilingue (Français • Anglais • Éwé) lors de la visite officielle de Son Excellence l'Ambassadeur du Japon au Port de Pêche de Lomé."
+            }
+          ]
         },
         en: {
           sectionTag: "Proof of Work & Field Missions",
@@ -1606,7 +1660,26 @@
           btnBack: "Back to Portfolio",
           btnViewFull: "View Full Size",
           emptyMessage: "No photos yet.",
-          items: []
+          items: [
+            {
+              id: "interprete-fr-ewe",
+              image: "assets/images/gallery/interprete-fr-ewe-1.jpg",
+              images: [
+                "assets/images/gallery/interprete-fr-ewe-1.jpg",
+                "assets/images/gallery/interprete-fr-ewe-2.jpg",
+                "assets/images/gallery/interprete-fr-ewe-3.jpg"
+              ],
+              fileNames: ["interprete-fr-ewe-1.jpg", "interprete-fr-ewe-2.jpg", "interprete-fr-ewe-3.jpg"],
+              photoCount: 3,
+              title: "Interpreter: Fr-Ewe",
+              category: "terrain",
+              categoryLabel: "Field Operations",
+              date: "September 2026",
+              location: "Lomé Fishing Port, Togo",
+              caption: "Executive Assistant and Interpreter for the Ambassador of Japan in Côte d'Ivoire during his official visit to Lomé.",
+              proofDetails: "High-level consecutive interpretation and trilingual mediation (French • English • Ewe) during the official delegation visit to Lomé Fishing Port."
+            }
+          ]
         }
       };
 
@@ -1622,7 +1695,7 @@
               PORTFOLIO_CONFIG.content[langKey] &&
               PORTFOLIO_CONFIG.content[langKey].gallery) {
             const cfg = PORTFOLIO_CONFIG.content[langKey].gallery;
-            const items = Array.isArray(cfg.items) ? cfg.items : (fallback.items || []);
+            const items = (Array.isArray(cfg.items) && cfg.items.length > 0) ? cfg.items : (fallback.items || []);
             return {
               ...fallback,
               ...cfg,
@@ -1635,18 +1708,25 @@
         return fallback;
       }
 
-      // Combinaison des éléments de config.js (ou secours) + éléments personnalisés
+      // Combinaison des éléments de config.js (ou secours) + éléments personnalisés (avec déduplication)
       function getAllGalleryItems(lang) {
         const galleryData = getGalleryData(lang);
         const defaultItems = galleryData.items || [];
         const customItems = getCustomItems();
-        return [...customItems, ...defaultItems];
+        const combined = [...customItems, ...defaultItems];
+        const seen = new Set();
+        return combined.filter(item => {
+          if (!item || !item.id) return true;
+          if (seen.has(item.id)) return false;
+          seen.add(item.id);
+          return true;
+        });
       }
 
       // Rendu Galerie & Langue
       function renderGallery(lang) {
         currentLang = lang;
-        localStorage.setItem('kt_portfolio_lang', lang);
+        safeStorage.set('kt_portfolio_lang', lang);
         document.documentElement.setAttribute('lang', lang);
 
         const data = getGalleryData(lang);
@@ -1754,7 +1834,7 @@
                   </span>
                 ` : ''}
 
-                <img src="${coverImage}" alt="${item.title}" class="gallery-img" loading="lazy" onerror="if(!this.dataset.fallbackTried){this.dataset.fallbackTried='true';this.src='assets/images/gallery/ambassadeur-japon-lome.jpg';}">
+                <img src="${coverImage}" alt="${item.title}" class="gallery-img" loading="${index < 4 ? 'eager' : 'lazy'}" onerror="handleImgError(this)">
                 <div class="gallery-zoom-overlay">
                   <span class="zoom-icon-badge">
                     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1763,7 +1843,7 @@
                       <line x1="11" y1="8" x2="11" y2="14"></line>
                       <line x1="8" y1="11" x2="14" y2="11"></line>
                     </svg>
-                    ${count > 1 ? `Voir l'album (${count} photos)` : (data.btnViewFull || 'Agrandir')}
+                    ${count > 1 ? (currentLang === 'fr' ? `Voir l'album (${count} photos)` : `View Album (${count} photos)`) : (data.btnViewFull || (currentLang === 'fr' ? 'Agrandir' : 'View Full Size'))}
                   </span>
                 </div>
               </div>
@@ -1773,7 +1853,7 @@
                   <span>📅 ${item.date}</span>
                 </div>
                 <h3 class="gallery-title">${item.title}</h3>
-                <p class="gallery-caption"><strong>Légende :</strong> ${item.caption}</p>
+                <p class="gallery-caption"><strong>${currentLang === 'fr' ? 'Légende :' : 'Caption:'}</strong> ${item.caption}</p>
                 <div class="card-actions-row">
                   <button type="button" class="card-edit-btn" data-edit-id="${item.id}" title="Modifier texte ou photos">
                     <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -2313,7 +2393,7 @@
         lightboxImg.onerror = function() {
           if (!this.dataset.fallbackTried) {
             this.dataset.fallbackTried = 'true';
-            this.src = 'assets/images/gallery/ambassadeur-japon-lome.jpg';
+            this.src = 'assets/images/gallery/interprete-fr-ewe-1.jpg';
           }
         };
         lightboxImg.src = photos[currentSubPhotoIndex];
@@ -2416,6 +2496,25 @@
       lightboxModal.addEventListener('click', (e) => {
         if (e.target === lightboxModal) closeLightbox();
       });
+
+      // Gestes tactiles pour smartphone (swipe gauche/droite)
+      let touchStartX = 0;
+      let touchEndX = 0;
+      lightboxModal.addEventListener('touchstart', (e) => {
+        if (e.touches && e.touches.length > 0) {
+          touchStartX = e.touches[0].clientX;
+        }
+      }, { passive: true });
+      lightboxModal.addEventListener('touchend', (e) => {
+        if (e.changedTouches && e.changedTouches.length > 0) {
+          touchEndX = e.changedTouches[0].clientX;
+          const diff = touchEndX - touchStartX;
+          if (Math.abs(diff) > 45) {
+            if (diff < 0) nextPhoto();
+            else prevPhoto();
+          }
+        }
+      }, { passive: true });
 
       document.addEventListener('keydown', (e) => {
         if (!lightboxModal.classList.contains('active')) return;

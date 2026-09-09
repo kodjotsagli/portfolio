@@ -94,7 +94,38 @@ Enregistrez le fichier `config.js` : vos modifications s'afficheront instantané
 
 ---
 
-## 🌐 5. Guide de Publication Gratuite sur GitHub Pages (Étape par étape)
+## 📷 5. Comment ajouter vous-même de nouvelles photos dans la Galerie (Preuves de Travail)
+
+Pour enrichir votre galerie avec de nouvelles photos de terrain, réunions ou visites d'infrastructures :
+
+### Étape 1 : Déposer votre photo
+Déposez votre fichier image (JPG, PNG ou WebP) dans le dossier :  
+👉 `assets/images/gallery/` (par exemple : `ma-nouvelle-mission.jpg`)
+
+### Étape 2 : Ajouter la photo dans `config.js`
+Ouvrez le fichier `config.js` et cherchez la section `gallery: { items: [ ... ] }`.  
+Copiez-collez simplement ce bloc dans la liste :
+
+```javascript
+{
+  id: "gal-7",
+  image: "assets/images/gallery/ma-nouvelle-mission.jpg",
+  title: "Visite de Terrain au Port de Lomé",
+  category: "terrain", // Choix : "terrain", "cooperation" ou "evaluation"
+  categoryLabel: "Opérations de Terrain",
+  date: "2026",
+  location: "Lomé, Togo",
+  caption: "Coordination et échanges sur site avec les équipes techniques et les représentants des bailleurs.",
+  proofDetails: "Preuve de travail attestant du suivi d'exécution des livrables opérationnels."
+},
+```
+
+### Étape 3 : Enregistrez !
+C'est tout ! Votre photo apparaît immédiatement dans la page **`gallery.html`** et sur la page d'accueil avec son badge, sa date, son lieu, sa légende complète et sa vue plein écran (Lightbox) !
+
+---
+
+## 🌐 6. Guide de Publication Gratuite sur GitHub Pages (Étape par étape)
 
 Vous pouvez héberger ce site **gratuitement et à vie** sur **GitHub Pages**.
 
@@ -111,12 +142,14 @@ Rendez-vous sur [github.com](https://github.com/) et créez un compte gratuit.
 1. Sur la page de votre repository, cliquez sur **Uploading an existing file**.
 2. Glissez-déposez l'ensemble des fichiers et dossiers de votre dossier `CV/` :
    - `index.html`
+   - `gallery.html`
+   - `card.html`
    - `style.css`
    - `script.js`
    - `config.js`
    - `robots.txt`
    - `sitemap.xml`
-   - Le dossier `assets/` (avec ses sous-dossiers `images/`, `documents/`, `icons/`)
+   - Le dossier `assets/` (avec ses sous-dossiers `images/`, `gallery/`, `documents/`, `icons/`)
    - Le dossier `favicon/`
 3. En bas de la page, cliquez sur **Commit changes**.
 
@@ -129,7 +162,7 @@ Rendez-vous sur [github.com](https://github.com/) et créez un compte gratuit.
 
 ---
 
-## 🔗 6. Associer un Nom de Domaine Personnalisé (Optionnel)
+## 🔗 7. Associer un Nom de Domaine Personnalisé (Optionnel)
 
 Si vous achetez un nom de domaine (par exemple `www.kodjo-tsagli.com` sur Namecheap, Hostinger ou OVH) :
 1. Dans les paramètres de votre repository GitHub (**Settings > Pages**) ;
@@ -139,7 +172,7 @@ Si vous achetez un nom de domaine (par exemple `www.kodjo-tsagli.com` sur Namech
 
 ---
 
-## 🔒 7. Sécurité & Performance
+## 🔒 8. Sécurité & Performance
 
 * **Sécurité** : Aucun mot de passe, token ou clé API n'est requis ni exposé dans le code.
 * **Formulaire de contact** : Conçu pour ouvrir directement le client de messagerie sécurisé de l'utilisateur avec un message pré-rempli (`mailto:`), ou prêt pour une intégration simple avec des services tiers comme [Formspree](https://formspree.io/) si souhaité.

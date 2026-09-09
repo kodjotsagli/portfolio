@@ -488,7 +488,26 @@ const PORTFOLIO_CONFIG = {
             "3. Validez et vos photos apparaissent instantanément dans la galerie !"
           ]
         },
-        items: []
+        items: [
+          {
+            id: "interprete-fr-ewe",
+            image: "assets/images/gallery/interprete-fr-ewe-1.jpg",
+            images: [
+              "assets/images/gallery/interprete-fr-ewe-1.jpg",
+              "assets/images/gallery/interprete-fr-ewe-2.jpg",
+              "assets/images/gallery/interprete-fr-ewe-3.jpg"
+            ],
+            fileNames: ["interprete-fr-ewe-1.jpg", "interprete-fr-ewe-2.jpg", "interprete-fr-ewe-3.jpg"],
+            photoCount: 3,
+            title: "Interprète: Fr-Ewe",
+            category: "terrain",
+            categoryLabel: "Opérations de Terrain",
+            date: "Septembre 2026",
+            location: "Port de Pêche de Lomé",
+            caption: "Assistant Interprète de l'ambassadeur du Japon en Côte d'Ivoire en Visite à Lomé",
+            proofDetails: "Interprétariat consécutif de haut niveau et médiation linguistique trilingue (Français • Anglais • Éwé) lors de la visite officielle de Son Excellence l'Ambassadeur du Japon au Port de Pêche de Lomé."
+          }
+        ]
       },
       footer: {
         bio: "Coordinateur de projets internationaux, expert en liaison institutionnelle et interprète multilingue. Dédié à la réussite des initiatives de développement et d'infrastructures.",
@@ -953,7 +972,26 @@ const PORTFOLIO_CONFIG = {
             "3. Submit and your photos appear instantly in the gallery!"
           ]
         },
-        items: []
+        items: [
+          {
+            id: "interprete-fr-ewe",
+            image: "assets/images/gallery/interprete-fr-ewe-1.jpg",
+            images: [
+              "assets/images/gallery/interprete-fr-ewe-1.jpg",
+              "assets/images/gallery/interprete-fr-ewe-2.jpg",
+              "assets/images/gallery/interprete-fr-ewe-3.jpg"
+            ],
+            fileNames: ["interprete-fr-ewe-1.jpg", "interprete-fr-ewe-2.jpg", "interprete-fr-ewe-3.jpg"],
+            photoCount: 3,
+            title: "Interpreter: Fr-Ewe",
+            category: "terrain",
+            categoryLabel: "Field Operations",
+            date: "September 2026",
+            location: "Lomé Fishing Port, Togo",
+            caption: "Executive Assistant and Interpreter for the Ambassador of Japan in Côte d'Ivoire during his official visit to Lomé.",
+            proofDetails: "High-level consecutive interpretation and trilingual mediation (French • English • Ewe) during the official delegation visit to Lomé Fishing Port."
+          }
+        ]
       },
       footer: {
         bio: "International Project Coordinator, institutional liaison expert, and multilingual interpreter dedicated to the success of development and infrastructure initiatives.",
